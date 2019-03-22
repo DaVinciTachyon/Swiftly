@@ -1,6 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, FlatList, Image, Alert } from 'react-native';
 
+import Banner from './assets/Banner';
+import DriverMainOrders from './assets/DriverMainOrders';
+import OrderScreen from './assets/OrderScreen';
+import DriverMap from './assets/DriverMap';
+import { Constants } from 'expo';
+
 export default class App extends React.Component {
 
     state = {
