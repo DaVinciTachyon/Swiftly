@@ -19,11 +19,11 @@ from rest_framework import routers
 from SwiftlyAPI.API import views
 
 router = routers.DefaultRouter()
-router.register(r'accounts', views.AccountsViewSet)
+router.register(r'user', views.UserViewSet)
 router.register(r'orders', views.OrdersViewSet)
 router.register(r'pickuplocations', views.PickUpLocationsViewSet)
-router.register(r'locationitems', views.LocationItemsViewSet)
-router.register(r'orderitems', views.OrderItemsViewSet)
+#router.register(r'locationitems', views.LocationItemsViewSet)
+#router.register(r'orderitems', views.OrderItemsViewSet)
 """
 Wire up our API using automatic URL routing.
 Additionally, we include login URLs for the browsable API.
