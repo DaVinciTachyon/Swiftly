@@ -44,6 +44,7 @@ class User(AbstractBaseUser, PermissionsMixin, models.Model):
     is_driver = models.BooleanField(default=False)
     is_available = models.BooleanField(default=False)
     home_coordinates = models.CharField(max_length=30, default='')
+    #cart
     #card details
 
     objects = UserManager()
@@ -73,6 +74,9 @@ class Orders(models.Model):
     class Meta:
         ordering = ('id',)
 
+#cart
+#all items
+
 class PickUpLocations(models.Model):
     coordinates = models.CharField(max_length=30, default='')
     phone_number = models.IntegerField()
@@ -82,6 +86,7 @@ class PickUpLocations(models.Model):
         ordering = ('id',)
 
 class LocationItems(models.Model):
+    #primary key, is key from all items
     name = models.TextField()
     quantity = models.IntegerField()
     item_cost = models.IntegerField()
@@ -90,7 +95,7 @@ class LocationItems(models.Model):
         ordering = ('id',)
 
 class OrderItems(models.Model):
-    item_id = models.IntegerField()
+    item_id = models.IntegerField() #primary key
     quantity = models.IntegerField()
     total_cost = models.IntegerField()
     
