@@ -5,6 +5,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = ('email', 'username', 'alias', 'first_name', 'last_name', 'aboutme', 'avatar', 'date_joined', 'is_active', 'is_staff', 'is_driver', 'is_available', 'home_coordinates')
+        #'url', 
 
 class OrdersSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

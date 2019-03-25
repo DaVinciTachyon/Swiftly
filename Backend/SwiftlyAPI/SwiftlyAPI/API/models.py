@@ -1,15 +1,16 @@
 from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager, PermissionsMixin)
 from django.db import models
 from django.utils import timezone
+from django.contrib import admin
 
 class UserManager(BaseUserManager):
     def create_user(self, email, username, password, alias=None):
         if not email:
-            raise ValueError("ENTER AN EMAIL BUDDY")
+            raise ValueError("You have not entered an email.")
         if not username:
-            raise ValueError("I KNOW YOU HAVE A NAME")
+            raise ValueError("You have not entered a username.")
         if not password:
-            raise ValueError("PASSWORD?!?!?!? HELLO??")
+            raise ValueError("You have not entered a password.")
         if not alias:
             alias = username
         
@@ -23,14 +24,14 @@ class UserManager(BaseUserManager):
 
     def create_superuser(self, email, username, password, alias=None):
         user = self.create_user(email, username, password, alias)
-        user.is_staff()
+        user.is_staff = True
         user.is_superuser = True
         user.save()
-        admin.site.register(User, UserAdmin)
         return user
     
 class User(AbstractBaseUser, PermissionsMixin, models.Model):
-    email = models.EmailField(unique=True)
+    #url = models.ForeignKey('User', on_delete=models.SET_NULL, null=True)
+    email = models.EmailField(verbose_name='email address', unique=True)
     username = models.CharField(max_length=25, unique=True, default='')
     alias = models.CharField(max_length=40, default='')
     first_name = models.CharField(max_length=40, default='')
