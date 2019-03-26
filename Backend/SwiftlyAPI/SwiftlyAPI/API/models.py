@@ -30,7 +30,6 @@ class UserManager(BaseUserManager):
         return user
     
 class User(AbstractBaseUser, PermissionsMixin, models.Model):
-    #url = models.ForeignKey('User', on_delete=models.SET_NULL, null=True)
     email = models.EmailField(verbose_name='email address', unique=True)
     username = models.CharField(max_length=25, unique=True, default='')
     alias = models.CharField(max_length=40, default='')
