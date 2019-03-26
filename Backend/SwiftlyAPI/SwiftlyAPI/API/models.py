@@ -30,7 +30,6 @@ class UserManager(BaseUserManager):
         return user
     
 class User(AbstractBaseUser, PermissionsMixin, models.Model):
-    #url = models.ForeignKey('User', on_delete=models.SET_NULL, null=True)
     email = models.EmailField(verbose_name='email address', unique=True)
     username = models.CharField(max_length=25, unique=True, default='')
     alias = models.CharField(max_length=40, default='')
@@ -44,6 +43,7 @@ class User(AbstractBaseUser, PermissionsMixin, models.Model):
     is_driver = models.BooleanField(default=False)
     is_available = models.BooleanField(default=False)
     home_coordinates = models.CharField(max_length=30, default='')
+    cart = models.ForeignKey('Item', on_delete=models.SET_NULL, null=True)
     #card details
 
     objects = UserManager()
@@ -60,10 +60,10 @@ class User(AbstractBaseUser, PermissionsMixin, models.Model):
     def get_long_name(self):
         return "{} @{}".format(self.alias, self.username)
 
-class Orders(models.Model):
+class Order(models.Model):
     user_id = models.IntegerField()
     driver_id = models.IntegerField()
-    items = models.ForeignKey('OrderItems', on_delete=models.SET_NULL, null=True)
+    items = models.ForeignKey('Item', on_delete=models.SET_NULL, null=True)
     gross_cost = models.FloatField()
     delivery_cost = models.FloatField()
     net_cost = models.FloatField()
@@ -73,26 +73,25 @@ class Orders(models.Model):
     class Meta:
         ordering = ('id',)
 
-class PickUpLocations(models.Model):
+class PickUpLocation(models.Model):
     coordinates = models.CharField(max_length=30, default='')
     phone_number = models.IntegerField()
-    items = models.ForeignKey('LocationItems', on_delete=models.SET_NULL, null=True)
+    items = models.ForeignKey('Item', on_delete=models.SET_NULL, null=True)
     
     class Meta:
         ordering = ('id',)
 
-class LocationItems(models.Model):
+class AllItem(models.Model):
+    image = models.ImageField(blank=True, null=True)
     name = models.TextField()
-    quantity = models.IntegerField()
-    item_cost = models.IntegerField()
+    cost = models.FloatField()
     
     class Meta:
         ordering = ('id',)
 
-class OrderItems(models.Model):
-    item_id = models.IntegerField()
+class Item(models.Model):
+    item_id = models.IntegerField(primary_key=True, unique=True)
     quantity = models.IntegerField()
-    total_cost = models.IntegerField()
     
     class Meta:
-        ordering = ('id',)
+        ordering = ('item_id',)

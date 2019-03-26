@@ -1,23 +1,19 @@
 from rest_framework import viewsets
-from .models import Orders, PickUpLocations, User#, LocationItems, OrderItems
-from .serializers import OrdersSerializer, PickUpLocationsSerializer, UserSerializer#, LocationItemsSerializer, OrderItemsSerializer
+from .models import Order, PickUpLocation, User, AllItem
+from .serializers import OrderSerializer, PickUpLocationSerializer, UserSerializer, AllItemSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-class OrdersViewSet(viewsets.ModelViewSet):
-    queryset = Orders.objects.all()
-    serializer_class = OrdersSerializer
+class OrderViewSet(viewsets.ModelViewSet):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
 
-class PickUpLocationsViewSet(viewsets.ModelViewSet):
-    queryset = PickUpLocations.objects.all()
-    serializer_class = PickUpLocationsSerializer
+class PickUpLocationViewSet(viewsets.ModelViewSet):
+    queryset = PickUpLocation.objects.all()
+    serializer_class = PickUpLocationSerializer
 
-"""class LocationItemsViewSet(viewsets.ModelViewSet):
-    queryset = LocationItems.objects.all()
-    serializer_class = LocationItemsSerializer
-
-class OrderItemsViewSet(viewsets.ModelViewSet):
-    queryset = OrderItems.objects.all()
-    serializer_class = OrderItemsSerializer"""
+class AllItemViewSet(viewsets.ModelViewSet):
+    queryset = AllItem.objects.all()
+    serializer_class = AllItemSerializer
