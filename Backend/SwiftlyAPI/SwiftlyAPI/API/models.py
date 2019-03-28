@@ -92,6 +92,6 @@ class AllItem(models.Model):
 class Item(models.Model):
     item_id = models.IntegerField(primary_key=True, unique=True)
     quantity = models.IntegerField()
-    
+
     class Meta:
         ordering = ('item_id',)
