@@ -43,7 +43,6 @@ class User(AbstractBaseUser, PermissionsMixin, models.Model):
     is_driver = models.BooleanField(default=False)
     is_available = models.BooleanField(default=False)
     home_coordinates = models.CharField(max_length=30, default='')
-    cart = models.ForeignKey('Item', on_delete=models.SET_NULL, null=True)
     #card details
 
     objects = UserManager()
@@ -60,10 +59,14 @@ class User(AbstractBaseUser, PermissionsMixin, models.Model):
     def get_long_name(self):
         return "{} @{}".format(self.alias, self.username)
 
+class Cart(models.Model):
+    user_id = models.IntegerField()
+    item_id = models.IntegerField()
+    quantity = models.IntegerField()
+
 class Order(models.Model):
     user_id = models.IntegerField()
     driver_id = models.IntegerField()
-    items = models.ForeignKey('Item', on_delete=models.SET_NULL, null=True)
     gross_cost = models.FloatField()
     delivery_cost = models.FloatField()
     net_cost = models.FloatField()
@@ -73,13 +76,22 @@ class Order(models.Model):
     class Meta:
         ordering = ('id',)
 
+class OrderItem(models.Model):
+    order_id = models.IntegerField()
+    item_id = models.IntegerField()
+    quantity = models.IntegerField()
+
 class PickUpLocation(models.Model):
     coordinates = models.CharField(max_length=30, default='')
     phone_number = models.IntegerField()
-    items = models.ForeignKey('Item', on_delete=models.SET_NULL, null=True)
     
     class Meta:
         ordering = ('id',)
+
+class LocationItem(models.Model):
+    location_id = models.IntegerField()
+    item_id = models.IntegerField(unique = True)
+    quantity = models.IntegerField()
 
 class AllItem(models.Model):
     image = models.ImageField(blank=True, null=True)
@@ -88,10 +100,3 @@ class AllItem(models.Model):
     
     class Meta:
         ordering = ('id',)
-
-class Item(models.Model):
-    item_id = models.IntegerField(primary_key=True, unique=True)
-    quantity = models.IntegerField()
-
-    class Meta:
-        ordering = ('item_id',)
