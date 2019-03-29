@@ -16,11 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
-from SwiftlyAPI.quickstart import views
+from SwiftlyAPI.API import views
 
 router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
+router.register(r'user', views.UserViewSet)
+router.register(r'order', views.OrderViewSet)
+router.register(r'pickuplocation', views.PickUpLocationViewSet)
+router.register(r'allitem', views.AllItemViewSet)
 """
 Wire up our API using automatic URL routing.
 Additionally, we include login URLs for the browsable API.
