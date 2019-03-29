@@ -9,6 +9,7 @@ import cartScreen from './cartScreen.js';
 import GamesScreen from './GamesScreen.js';
 import UtensilsScreen from './UtensilsScreen.js';
 import DecorScreen from './DecorScreen.js';
+import payment from './payment.js';
 
 
 class App extends React.Component {
@@ -28,7 +29,8 @@ const AppStackNavigator = createStackNavigator({
     GamesScreen: GamesScreen,
     UtensilsScreen: UtensilsScreen,
     DecorScreen: DecorScreen,
-    loginScreen: loginScreen
+    loginScreen: loginScreen,
+    payment: payment
 
 });
 

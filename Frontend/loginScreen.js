@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import {
     StyleSheet, Text, View, Image,
     TouchableWithoutFeedback, StatusBar,
@@ -40,19 +40,19 @@ export default class Login extends Component {
                                 />
                                 <Button style={styles.buttonContainer}
                                     title="SIGN IN"
-                                    color="#FF0000"
+                                    color="#1569C7"
                                     onPress={() => {
                                         this.props.navigation.navigate('ProductScreen')
-                                    
+
                                     }}
-                                   >
+                                >
                                 </Button>
                             </View>
                         </View>
                     </TouchableWithoutFeedback>
                 </KeyboardAvoidingView>
             </SafeAreaView>
-        )
+        );
     }
 }
 const styles = StyleSheet.create({
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
         height: 56,
     },
     title: {
-        color: '#f7c744',
+        color: 'black',
         fontSize: 18,
         textAlign: 'center',
         marginTop: 5,
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10
     },
     buttonContainer: {
-        backgroundColor: 'red',
+        backgroundColor: '#1569C7',
         paddingVertical: 15
     },
     buttonText: {
@@ -103,4 +103,4 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 18
     }
-})
+});
