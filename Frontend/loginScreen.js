@@ -17,7 +17,7 @@ export default class Login extends Component {
                         <View style={styles.logoContainer}>
                             <View style={styles.logoContainer}>
                                 <Image style={styles.logo}
-                                    source={require('../swiftly/logo.png')}>
+                                    source={require('./logo.png')}>
                                 </Image>
                                 <Text style={styles.title}>Swiftly</Text>
                             </View>
