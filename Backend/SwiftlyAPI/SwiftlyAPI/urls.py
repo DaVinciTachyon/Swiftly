@@ -20,8 +20,11 @@ from SwiftlyAPI.API import views
 
 router = routers.DefaultRouter()
 router.register(r'user', views.UserViewSet)
+router.register(r'cart', views.CartViewSet)
 router.register(r'order', views.OrderViewSet)
+router.register(r'orderitem', views.OrderItemViewSet)
 router.register(r'pickuplocation', views.PickUpLocationViewSet)
+router.register(r'locationitem', views.LocationItemViewSet)
 router.register(r'allitem', views.AllItemViewSet)
 """
 Wire up our API using automatic URL routing.
