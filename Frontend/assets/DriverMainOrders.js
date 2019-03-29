@@ -11,24 +11,18 @@ import{
 
 class DriverMainOrders extends React.Component{
 	state = {
-		products: [{	
-			name: "Address0,\nAddress,\nAddress,\nAddress", imageSrc:
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIpRXPIXfIUFnEv6ty3yEvfXKw302gugp-4XFlmsTENiLe-gjo"
+		orders: [{	
+			name: "Address0,\nAddress,\nAddress,\nAddress",coordinates:[{lat:123},{lng:-6}]
 		},{
-			name: "Address1,\nAddress,\nAddress,\nAddress", imageSrc:
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIpRXPIXfIUFnEv6ty3yEvfXKw302gugp-4XFlmsTENiLe-gjo"
+			name: "Address1,\nAddress,\nAddress,\nAddress",coordinates:[{lat:123},{lng:-6}]
 		},{	
-			name: "Address2,\nAddress,\nAddress,\nAddress", imageSrc:
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIpRXPIXfIUFnEv6ty3yEvfXKw302gugp-4XFlmsTENiLe-gjo"
+			name: "Address2,\nAddress,\nAddress,\nAddress",coordinates:[{lat:123},{lng:-6}]
 		},{
-			name: "Address3,\nAddress,\nAddress,\nAddress", imageSrc:
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIpRXPIXfIUFnEv6ty3yEvfXKw302gugp-4XFlmsTENiLe-gjo"
+			name: "Address3,\nAddress,\nAddress,\nAddress",coordinates:[{lat:123},{lng:-6}]
 		},{
-			name: "Address4,\nAddress,\nAddress,\nAddress", imageSrc:
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIpRXPIXfIUFnEv6ty3yEvfXKw302gugp-4XFlmsTENiLe-gjo"
+			name: "Address4,\nAddress,\nAddress,\nAddress",coordinates:[{lat:123},{lng:-6}]
 		},{
-			name: "Address5,\nAddress,\nAddress,\nAddress", imageSrc:
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIpRXPIXfIUFnEv6ty3yEvfXKw302gugp-4XFlmsTENiLe-gjo"
+			name: "Address5,\nAddress,\nAddress,\nAddress",coordinates:[{lat:123},{lng:-6}]
 		}]
 	}
 	render() {
@@ -38,16 +32,23 @@ class DriverMainOrders extends React.Component{
 				flexDirection: 'column'
 			}}>
 			{/*	selected orders - takes to all seleced orders	*/}
-				<TouchableOpacity
-					style={styles.button}
-					onPress={() => {
-						Alert.alert("selected orders screen")
-					}}
-				>
-					<Text style={[styles.labelText]}>
-						Selected Orders
-					</Text>
-				</TouchableOpacity>
+				<View style={{ flexDirection: "row", alignItems: "center" }}>
+					<View style={[styles.label,{width : '50%'}]}>
+						<Text style={[styles.labelText]}>
+							Selected Orders
+						</Text>
+					</View>
+					<TouchableOpacity
+						style={[styles.label,{width : '50%'}]}
+						onPress={
+							() => this.props.navigation.navigate('MarkersMap')
+						}
+					>
+						<Text style={[styles.labelText]}>
+							View On Map
+						</Text>
+					</TouchableOpacity>
+				</View>
 			{/*	flatlist of selected orders	*/}
 				<FlatList
 					ItemSeparatorComponent={() =>
@@ -55,18 +56,18 @@ class DriverMainOrders extends React.Component{
 							style={{ height: 1, width: "100%", backgroundColor: "lightgray" }}
 						/>
 					}
-					data={this.state.products}
+					data={this.state.orders}
 					keyExtractor={item => item.name}
 					renderItem={({ item }) =>
 						<TouchableOpacity
-							onPress={() => {
-								Alert.alert("order screen for:\n"+item.name)
-							}}
+							onPress={
+								() => this.props.navigation.navigate('Order')
+							}
 						>
 							<View style={{ flexDirection: "row", alignItems: "center" }}>
 								<Image
 									style={{ width: 50, height: 50 }}
-									source={{ uri: item.imageSrc }}
+									source={require('./icon.png')}
 								/>
 								<Text style={{ padding: 10 }}>{item.name}</Text>
 							</View>
@@ -75,13 +76,13 @@ class DriverMainOrders extends React.Component{
 				/>
 			{/*	available orders - takes to all available orders	*/}
 				<TouchableOpacity
-					style={styles.button}
-					onPress={() => {
-						Alert.alert("available orders screen")
-					}}
+					style={styles.label}
+					onPress={
+						() => this.props.navigation.navigate('AvailableOrders')
+					}
 				>
 					<Text style={[styles.labelText]}>
-						available Orders
+						Available Orders
 					</Text>
 				</TouchableOpacity>
 			</View>
@@ -91,9 +92,9 @@ class DriverMainOrders extends React.Component{
 export default DriverMainOrders;
 
 const styles = StyleSheet.create({
-  button: {
+  label: {
     alignItems: 'center',
-    backgroundColor: '#FF0000',
+    backgroundColor: '#1569C7',
     padding: 10
   },
   labelText: {

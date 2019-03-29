@@ -13,8 +13,8 @@ import{
 } from 'react-native';
 import MapViewDirections from './MapViewDirections';
 
-const LATITUDE = 53.35;
-const LONGITUDE = -6.48;
+const LATITUDE = 53.343537;
+const LONGITUDE = -6.250267;
 const DELTA = 0.11;
 const GOOGLE_MAPS_APIKEY = 'AIzaSyCYvMpmVhFc0ydILEuXGJNYNGFnBoKPCL8';
 
@@ -105,7 +105,9 @@ class DriverMap extends React.Component{
 						showsTraffic = {true}
 						onRegionChange={this._handleMapRegionChange}
 				*/}
-				<Text>
+				<Text
+					style={{color:'#FFFFFF'}}
+				>
 				{/*	BUG - to be left in for my location button to show	*/}
 					{this.state.locationResult}
 				</Text>

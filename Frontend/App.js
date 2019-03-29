@@ -11,6 +11,11 @@ import UtensilsScreen from './UtensilsScreen.js';
 import DecorScreen from './DecorScreen.js';
 import payment from './payment.js';
 
+import DriverMainOrders from "./assets/DriverMainOrders";
+import OrderScreen from './assets/OrderScreen';
+import DriverMap from './assets/DriverMap';
+import AvailableOrdersScreen from './assets/AvailableOrdersScreen';
+import MarkersMapScreen from './assets/MarkersMapScreen';
 
 class App extends React.Component {
     render() {
@@ -30,7 +35,13 @@ const AppStackNavigator = createStackNavigator({
     UtensilsScreen: UtensilsScreen,
     DecorScreen: DecorScreen,
     loginScreen: loginScreen,
-    payment: payment
+    payment: payment,
+	
+	Driver: DriverMainOrders,
+	Order: OrderScreen,
+	Map: DriverMap,
+	AvailableOrders: AvailableOrdersScreen,
+	MarkersMap: MarkersMapScreen
 
 });
 
