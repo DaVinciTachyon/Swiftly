@@ -1,6 +1,5 @@
 source env/bin/activate
-cd SwiftlyAPI/
-rm db.*
-python3 manage.py makemigrations
-python3 manage.py migrate
-python3 manage.py createsuperuser
+rm SwiftlyAPI/db.*
+python3 SwiftlyAPI/manage.py makemigrations
+python3 SwiftlyAPI/manage.py migrate
+python3 SwiftlyAPI/manage.py createsuperuser
