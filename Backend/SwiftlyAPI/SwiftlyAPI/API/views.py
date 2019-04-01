@@ -3,7 +3,7 @@ from rest_framework.viewsets import GenericViewSet
 from rest_framework.mixins import CreateModelMixin, ListModelMixin, RetrieveModelMixin, UpdateModelMixin
 from .models import Order, PickUpLocation, User, AllItem, Cart, OrderItem, LocationItem
 from .serializers import OrderSerializer, GroupSerializer, PickUpLocationSerializer, UserSerializer, AllItemSerializer, CartSerializer, OrderItemSerializer, LocationItemSerializer
-from django.contrib.auth.models import Group ####
+from django.contrib.auth.models import Group
 
 class UserViewSet(GenericViewSet,   # generic view functionality
                      CreateModelMixin,  # handles POSTs

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from django.contrib.auth.models import Group###
+from django.contrib.auth.models import Group
 from .models import Order, PickUpLocation, User, AllItem, Cart, OrderItem, LocationItem
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
