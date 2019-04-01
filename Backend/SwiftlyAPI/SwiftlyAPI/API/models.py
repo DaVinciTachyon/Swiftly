@@ -2,7 +2,6 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 from django.db import models
 from django.utils import timezone
 from django.contrib import admin
-from django.contrib.auth.models import Group###
 
 class UserManager(BaseUserManager):
     def create_user(self, email, username, password, alias=None):
@@ -75,6 +74,8 @@ class Order(models.Model):
     net_cost = models.FloatField()
     pick_up_location_id = models.IntegerField()
     drop_off_coordinates = models.CharField(max_length=30, default='')
+    has_driver = models.BooleanField(default=False)
+    is_complete = models.BooleanField(default=False)
 
     class Meta:
         ordering = ('id',)
@@ -90,6 +91,8 @@ class OrderItem(models.Model):
 class PickUpLocation(models.Model):
     coordinates = models.CharField(max_length=30, default='')
     phone_number = models.IntegerField()
+    is_open = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True)
     
     class Meta:
         ordering = ('id',)

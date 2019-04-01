@@ -1,6 +1,11 @@
 from rest_framework import serializers
-from django.contrib.auth.models import Group###
+from django.contrib.auth.models import Group
 from .models import Order, PickUpLocation, User, AllItem, Cart, OrderItem, LocationItem
+
+#class NewUserSerializer(serializers.HyperlinkedModelSerializer):
+#    class Meta:
+#        model = User
+#        fields = ('email', 'username', 'alias', 'first_name', 'last_name', 'avatar', 'groups')
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -30,7 +35,7 @@ class OrderItemSerializer(serializers.HyperlinkedModelSerializer):
 class PickUpLocationSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = PickUpLocation
-        fields = ('url', 'id', 'coordinates', 'phone_number')
+        fields = ('url', 'id', 'coordinates', 'phone_number', 'is_open', 'is_active')
 
 class LocationItemSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

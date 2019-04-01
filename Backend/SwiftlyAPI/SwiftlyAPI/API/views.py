@@ -1,15 +1,29 @@
-from rest_framework import viewsets
-from rest_framework.mixins import CreateModelMixin, ListModelMixin, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin
+from rest_framework import viewsets, permissions
 from rest_framework.viewsets import GenericViewSet
+from rest_framework.mixins import CreateModelMixin, ListModelMixin, RetrieveModelMixin, UpdateModelMixin
 from .models import Order, PickUpLocation, User, AllItem, Cart, OrderItem, LocationItem
-from .serializers import OrderSerializer, GroupSerializer, PickUpLocationSerializer, UserSerializer, AllItemSerializer, CartSerializer, OrderItemSerializer, LocationItemSerializer
-from django.contrib.auth.models import Group ####
+from .serializers import OrderSerializer, GroupSerializer, PickUpLocationSerializer, UserSerializer, AllItemSerializer, CartSerializer, OrderItemSerializer, LocationItemSerializer#, NewUserSerializer
+from django.contrib.auth.models import Group
+from rest_framework.permissions import AllowAny
 
-class UserViewSet(viewsets.ModelViewSet):
+#class NewUserViewSet(GenericViewSet,   # generic view functionality
+#                    CreateModelMixin,  # handles POSTs
+#                    permissions.AllowAny): #handles permission
+#    queryset = User.objects.all()
+#    serializer_class = NewUserSerializer
+#    permission_classes = (permissions.AllowAny,)
+
+class UserViewSet(GenericViewSet,   # generic view functionality
+                     CreateModelMixin,  # handles POSTs
+                     RetrieveModelMixin,    # handles GETs for 1
+                     UpdateModelMixin,  # handles PUTs and PATCHes
+                     ListModelMixin):   # handles GETs
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-class GroupViewSet(viewsets.ModelViewSet):
+class GroupViewSet(GenericViewSet,   # generic view functionality
+                     RetrieveModelMixin,    # handles GETs for 1
+                     ListModelMixin):   # handles GETs
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
 
@@ -17,22 +31,42 @@ class CartViewSet(viewsets.ModelViewSet):
     queryset = Cart.objects.all()
     serializer_class = CartSerializer
 
-class OrderViewSet(viewsets.ModelViewSet):
+class OrderViewSet(GenericViewSet,   # generic view functionality
+                     CreateModelMixin,  # handles POSTs
+                     RetrieveModelMixin,    # handles GETs for 1
+                     UpdateModelMixin,  # handles PUTs and PATCHes
+                     ListModelMixin):   # handles GETs
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
 
-class OrderItemViewSet(viewsets.ModelViewSet):
+class OrderItemViewSet(GenericViewSet,   # generic view functionality
+                     CreateModelMixin,  # handles POSTs
+                     RetrieveModelMixin,    # handles GETs for 1
+                     UpdateModelMixin,  # handles PUTs and PATCHes
+                     ListModelMixin):   # handles GETs
     queryset = OrderItem.objects.all()
     serializer_class = OrderItemSerializer
 
-class PickUpLocationViewSet(viewsets.ModelViewSet):
+class PickUpLocationViewSet(GenericViewSet,   # generic view functionality
+                     CreateModelMixin,  # handles POSTs
+                     RetrieveModelMixin,    # handles GETs for 1
+                     UpdateModelMixin,  # handles PUTs and PATCHes
+                     ListModelMixin):   # handles GETs
     queryset = PickUpLocation.objects.all()
     serializer_class = PickUpLocationSerializer
 
-class LocationItemViewSet(viewsets.ModelViewSet):
+class LocationItemViewSet(GenericViewSet,   # generic view functionality
+                     CreateModelMixin,  # handles POSTs
+                     RetrieveModelMixin,    # handles GETs for 1
+                     UpdateModelMixin,  # handles PUTs and PATCHes
+                     ListModelMixin):   # handles GETs
     queryset = LocationItem.objects.all()
     serializer_class = LocationItemSerializer
 
-class AllItemViewSet(viewsets.ModelViewSet):
+class AllItemViewSet(GenericViewSet,   # generic view functionality
+                     CreateModelMixin,  # handles POSTs
+                     RetrieveModelMixin,    # handles GETs for 1
+                     UpdateModelMixin,  # handles PUTs and PATCHes
+                     ListModelMixin):   # handles GETs
     queryset = AllItem.objects.all()
     serializer_class = AllItemSerializer
