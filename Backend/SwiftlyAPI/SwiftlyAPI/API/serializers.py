@@ -30,7 +30,7 @@ class OrderItemSerializer(serializers.HyperlinkedModelSerializer):
 class PickUpLocationSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = PickUpLocation
-        fields = ('url', 'id', 'coordinates', 'phone_number')
+        fields = ('url', 'id', 'coordinates', 'phone_number', 'is_open', 'is_active')
 
 class LocationItemSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

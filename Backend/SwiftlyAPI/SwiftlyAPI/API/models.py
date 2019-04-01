@@ -90,6 +90,8 @@ class OrderItem(models.Model):
 class PickUpLocation(models.Model):
     coordinates = models.CharField(max_length=30, default='')
     phone_number = models.IntegerField()
+    is_open = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True)
     
     class Meta:
         ordering = ('id',)
