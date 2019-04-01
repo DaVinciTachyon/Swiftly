@@ -1,4 +1,6 @@
 from rest_framework import viewsets
+from rest_framework.mixins import CreateModelMixin, ListModelMixin, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin
+from rest_framework.viewsets import GenericViewSet
 from .models import Order, PickUpLocation, User, AllItem, Cart, OrderItem, LocationItem
 from .serializers import OrderSerializer, GroupSerializer, PickUpLocationSerializer, UserSerializer, AllItemSerializer, CartSerializer, OrderItemSerializer, LocationItemSerializer
 from django.contrib.auth.models import Group ####
@@ -6,9 +8,6 @@ from django.contrib.auth.models import Group ####
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-
-    def get_short_name(self):
-        return self.alias
 
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
