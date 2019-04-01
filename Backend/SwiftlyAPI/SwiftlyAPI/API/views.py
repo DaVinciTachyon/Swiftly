@@ -2,16 +2,16 @@ from rest_framework import viewsets, permissions
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.mixins import CreateModelMixin, ListModelMixin, RetrieveModelMixin, UpdateModelMixin
 from .models import Order, PickUpLocation, User, AllItem, Cart, OrderItem, LocationItem
-from .serializers import OrderSerializer, GroupSerializer, PickUpLocationSerializer, UserSerializer, AllItemSerializer, CartSerializer, OrderItemSerializer, LocationItemSerializer, NewUserSerializer
+from .serializers import OrderSerializer, GroupSerializer, PickUpLocationSerializer, UserSerializer, AllItemSerializer, CartSerializer, OrderItemSerializer, LocationItemSerializer#, NewUserSerializer
 from django.contrib.auth.models import Group
 from rest_framework.permissions import AllowAny
 
-class NewUserViewSet(GenericViewSet,   # generic view functionality
-                    CreateModelMixin,  # handles POSTs
-                    permissions.AllowAny): #handles permission
-    queryset = User.objects.all()
-    serializer_class = NewUserSerializer
-    permission_classes = (permissions.AllowAny,)
+#class NewUserViewSet(GenericViewSet,   # generic view functionality
+#                    CreateModelMixin,  # handles POSTs
+#                    permissions.AllowAny): #handles permission
+#    queryset = User.objects.all()
+#    serializer_class = NewUserSerializer
+#    permission_classes = (permissions.AllowAny,)
 
 class UserViewSet(GenericViewSet,   # generic view functionality
                      CreateModelMixin,  # handles POSTs
