@@ -2,6 +2,11 @@ from rest_framework import serializers
 from django.contrib.auth.models import Group
 from .models import Order, PickUpLocation, User, AllItem, Cart, OrderItem, LocationItem
 
+class NewUserSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = User
+        fields = ('email', 'username', 'alias', 'first_name', 'last_name', 'aboutme', 'avatar', 'home_coordinates', 'groups')
+
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User

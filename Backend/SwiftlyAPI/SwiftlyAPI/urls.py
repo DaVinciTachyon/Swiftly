@@ -20,6 +20,7 @@ from SwiftlyAPI.API import views
 
 router = routers.DefaultRouter()
 router.register(r'user', views.UserViewSet)
+router.register(r'newuser', views.NewUserViewSet)
 router.register(r'groups', views.GroupViewSet)
 router.register(r'pickuplocation', views.PickUpLocationViewSet)
 router.register(r'order', views.OrderViewSet)
