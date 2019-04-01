@@ -1,7 +1,8 @@
-from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager, PermissionsMixin)
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 from django.utils import timezone
 from django.contrib import admin
+from django.contrib.auth.models import Group###
 
 class UserManager(BaseUserManager):
     def create_user(self, email, username, password, alias=None):
@@ -40,7 +41,6 @@ class User(AbstractBaseUser, PermissionsMixin, models.Model):
     date_joined = models.DateTimeField(default=timezone.now)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-    is_driver = models.BooleanField(default=False)
     is_available = models.BooleanField(default=False)
     home_coordinates = models.CharField(max_length=30, default='')
     #card details
@@ -64,6 +64,9 @@ class Cart(models.Model):
     item_id = models.IntegerField()
     quantity = models.IntegerField()
 
+    class Meta:
+        ordering = ('id',)
+
 class Order(models.Model):
     user_id = models.IntegerField()
     driver_id = models.IntegerField()
@@ -81,6 +84,9 @@ class OrderItem(models.Model):
     item_id = models.IntegerField()
     quantity = models.IntegerField()
 
+    class Meta:
+        ordering = ('id',)
+
 class PickUpLocation(models.Model):
     coordinates = models.CharField(max_length=30, default='')
     phone_number = models.IntegerField()
@@ -92,6 +98,9 @@ class LocationItem(models.Model):
     location_id = models.IntegerField()
     item_id = models.IntegerField(unique = True)
     quantity = models.IntegerField()
+
+    class Meta:
+        ordering = ('id',)
 
 class AllItem(models.Model):
     image = models.ImageField(blank=True, null=True)

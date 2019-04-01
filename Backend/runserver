@@ -1,3 +1,2 @@
 source env/bin/activate
-cd SwiftlyAPI/
-python3 manage.py runserver
+python3 SwiftlyAPI/manage.py runserver

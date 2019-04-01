@@ -8,3 +8,4 @@ pip3 install djangorestframework
 sudo apt-get install python3-pip -y
 pip3 install virtualenv
 pip3 install Pillow
+pip3 install django-rest-swagger
