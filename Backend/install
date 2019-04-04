@@ -1,0 +1,10 @@
+sudo apt-get update -y
+sudo apt-get upgrade -y
+sudo apt-get install python3.7 -y
+sudo apt-get install python3-django -y
+sudo apt-get install python3-pip -y
+pip3 install django
+pip3 install djangorestframework
+sudo apt-get install python3-pip -y
+pip3 install virtualenv
+pip3 install Pillow
