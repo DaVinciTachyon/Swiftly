@@ -10,7 +10,8 @@ import GamesScreen from './GamesScreen.js';
 import UtensilsScreen from './UtensilsScreen.js';
 import DecorScreen from './DecorScreen.js';
 import payment from './payment.js';
-
+import orderReceived from './orderReceived.js';
+import extrasScreen from './extrasScreen.js';
 
 class App extends React.Component {
     render() {
@@ -30,7 +31,9 @@ const AppStackNavigator = createStackNavigator({
     UtensilsScreen: UtensilsScreen,
     DecorScreen: DecorScreen,
     loginScreen: loginScreen,
-    payment: payment
+    payment: payment,
+    orderReceived: orderReceived,
+    extrasScreen: extrasScreen
 
 });
 
