@@ -12,17 +12,21 @@ import{
 class DriverMainOrders extends React.Component{
 	state = {
 		orders: [{	
-			name: "Address0,\nAddress,\nAddress,\nAddress",coordinates:[{lat:123},{lng:-6}]
+			address: "38 St Malachy's Dr,\nGreenhills,\nDublin 12,\nD12 V9P6",screen:'Order1'
 		},{
-			name: "Address1,\nAddress,\nAddress,\nAddress",coordinates:[{lat:123},{lng:-6}]
+			address: "169 Balally Dr,\nBlackthorn,\nDublin 16,\nD16 XE67",screen:'Order1'
 		},{	
-			name: "Address2,\nAddress,\nAddress,\nAddress",coordinates:[{lat:123},{lng:-6}]
+			address: "29 Greencastle Dr,\nBonnybrook,\nDublin,\nD17 W273",screen:'Order1'
 		},{
-			name: "Address3,\nAddress,\nAddress,\nAddress",coordinates:[{lat:123},{lng:-6}]
+			address: "77 Ratoath Ave,\nFinglas South,\nDublin 11,\nD11 W285",screen:'Order1'
 		},{
-			name: "Address4,\nAddress,\nAddress,\nAddress",coordinates:[{lat:123},{lng:-6}]
+			address: "28 The Glen,\nBoden Park,\nRathfarnham,\nDublin 16,\nD16 N6C5",screen:'Order1'
 		},{
-			name: "Address5,\nAddress,\nAddress,\nAddress",coordinates:[{lat:123},{lng:-6}]
+			address: "29 Oldtown Ave,\nSantry,\nDublin 9,\nD09 WP48",screen:'Order1'
+		},{
+			address: "34 Seapark Rd,\nClontarf East,\nDublin 3,\nD03 HX77",screen:'Order1'
+		},{
+			address: "27 Charleston Ave,\nDublin 6,\nD06 KN72",screen:'Order1'
 		}]
 	}
 	render() {
@@ -57,19 +61,15 @@ class DriverMainOrders extends React.Component{
 						/>
 					}
 					data={this.state.orders}
-					keyExtractor={item => item.name}
+					keyExtractor={item => item.address}
 					renderItem={({ item }) =>
 						<TouchableOpacity
 							onPress={
-								() => this.props.navigation.navigate('Order')
+								() => this.props.navigation.navigate(item.screen)
 							}
 						>
 							<View style={{ flexDirection: "row", alignItems: "center" }}>
-								<Image
-									style={{ width: 50, height: 50 }}
-									source={require('./icon.png')}
-								/>
-								<Text style={{ padding: 10 }}>{item.name}</Text>
+								<Text style={{ padding: 10 }}>{item.address}</Text>
 							</View>
 						</TouchableOpacity>
 					}

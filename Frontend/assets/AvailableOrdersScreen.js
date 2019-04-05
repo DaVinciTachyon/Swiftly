@@ -12,26 +12,17 @@ import { Button } from 'react-native-elements';
 
 class AvailableOrdersScreen extends React.Component{
 	state = {
-		orders: [{	
-			name: "Address0,\nAddress,\nAddress,\nAddress",coordinates:[{lat:123},{lng:-6}]
+		orders: [{
+			address: "29 Oldtown Ave,\nSantry,\nDublin 9,\nD09 WP48",screen:'Order1'
 		},{
-			name: "Address1,\nAddress,\nAddress,\nAddress",coordinates:[{lat:123},{lng:-6}]
-		},{	
-			name: "Address2,\nAddress,\nAddress,\nAddress",coordinates:[{lat:123},{lng:-6}]
+			address: "34 Seapark Rd,\nClontarf East,\nDublin 3,\nD03 HX77",screen:'Order1'
 		},{
-			name: "Address3,\nAddress,\nAddress,\nAddress",coordinates:[{lat:123},{lng:-6}]
-		},{
-			name: "Address4,\nAddress,\nAddress,\nAddress",coordinates:[{lat:123},{lng:-6}]
-		},{
-			name: "Address5,\nAddress,\nAddress,\nAddress",coordinates:[{lat:123},{lng:-6}]
+			address: "27 Charleston Ave,\nDublin 6,\nD06 KN72",screen:'Order1'
 		}]
 	}
 	
 	deleteMessage(item) {
-		var list = [...this.state.orders]
-		let index = list.indexOf(item);
-		list.splice(index, 1);
-		this.setState({ list });
+		Alert.alert("add order to selected");
 	}
 	
 	renderOrder(order){
@@ -44,22 +35,18 @@ class AvailableOrdersScreen extends React.Component{
 				<TouchableOpacity
 					style={{width: '50%'}}
 					onPress={
-						() => this.props.navigation.navigate('Order')
+						() => this.props.navigation.navigate(order.screen)
 					}
 				>
 					<View style={{ flex:1,flexDirection: "row", alignItems: "center" }}>
-						<Image
-							style={{ width: 50, height: 50 }}
-							source={require('./icon.png')}
-						/>
-						<Text style={{ padding: 10 }}>{order.name}</Text>
+						<Text style={{ padding: 10 }}>{order.address}</Text>
 					</View>
 				</TouchableOpacity>
 				<View style={{ width: '50%',alignItems: 'center'}}>
 					<Button
 						type='solid'
 						title='Select Order'
-						onPress={() => this.deleteMessage(order) }
+						onPress={({order}) => this.deleteMessage(order) }
 					/>
 				</View>
 				
@@ -78,14 +65,15 @@ class AvailableOrdersScreen extends React.Component{
 					<Text style={[styles.labelText]}>Available Orders</Text>
 				</View>
 				<FlatList
+					data={this.state.orders}
+					extraData={this.state}
+					keyExtractor={item => item.address}
+					renderItem={({item}) => this.renderOrder(item)}
 					ItemSeparatorComponent={() =>
 						<View
 							style={{ height: 1, width: "100%", backgroundColor: "lightgray" }}
 						/>
 					}
-					data={this.state.orders}
-					keyExtractor={item => item.name}
-					renderItem={({item}) => this.renderOrder(item)}
 				/>
 			</View>
 		);

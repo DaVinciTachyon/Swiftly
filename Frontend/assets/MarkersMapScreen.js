@@ -30,14 +30,52 @@ class MarkersMapScreen extends React.Component{
 		markers:[
 			{
 				coordinates:{
-					latitude:53.3,
-					longitude:-6.4
-				}
+					latitude:53.310627,
+					longitude:-6.334087
+				},
+				screen:'Order1'
 			},{
 				coordinates:{
-					latitude:53.37,
-					longitude:-6.19
-				}
+					latitude:53.278943,
+					longitude:-6.227107
+				},
+				screen:'Order1'
+			},{
+				coordinates:{
+					latitude:53.397589,
+					longitude:-6.201678
+				},
+				screen:'Order1'
+			},{
+				coordinates:{
+					latitude:53.388510,
+					longitude:-6.319687
+				},
+				screen:'Order1'
+			},{
+				coordinates:{
+					latitude:53.283560,
+					longitude:-6.300406
+				},
+				screen:'Order1'
+			},{
+				coordinates:{
+					latitude:53.393166,
+					longitude: -6.260180
+				},
+				screen:'Order1'
+			},{
+				coordinates:{
+					latitude:53.364398,
+					longitude: -6.187742
+				},
+				screen:'Order1'
+			},{
+				coordinates:{
+					latitude:53.322879,
+					longitude: -6.258045
+				},
+				screen:'Order1'
 			}
 		]
 	}
@@ -56,21 +94,16 @@ class MarkersMapScreen extends React.Component{
 					showsUserLocation = {true}
 					showsMyLocationButton = {true}
 				>
-				{this.state.markers.map(item =>(
-					<MapView.Marker
-						key={item.coordinates.latitude.toString()}
-						coordinate={item.coordinates}
-					/>
-				))}
+					{this.state.markers.map(item =>(
+						<MapView.Marker
+							key={item.coordinates.latitude.toString()}
+							coordinate={item.coordinates}
+							onPress={
+								() => this.props.navigation.navigate(item.screen)
+							}
+						/>
+					))}
 				</MapView>
-				{/*		put in initialRegion to start map over warehouse
-						latitude: this.state.location.coords.latitude,
-						longitude: this.state.location.coords.longitude,
-						
-						under mapview??
-						showsTraffic = {true}
-						onRegionChange={this._handleMapRegionChange}
-				*/}
 				<Text style={{color:'#FFFFFF'}}>
 				{/*	BUG - to be left in for my location button to show	*/}
 					{this.state.locationResult}

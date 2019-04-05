@@ -34,8 +34,8 @@ class DriverMap extends React.Component{
 			{
 				title:'depot',
 				coordinates:{
-					latitude:53.3,
-					longitude:-6.4
+					latitude:53.310627,
+					longitude:-6.334087
 				}
 			},{
 				title:'second',
