@@ -1,2 +1,2 @@
-source env/bin/activate
-python3 SwiftlyAPI/manage.py runserver
+#source env/bin/activate
+python3 SwiftlyAPI/manage.py runserver 0.0.0.0:8000 #ip:port
