@@ -42,7 +42,7 @@ export default class Login extends Component {
                                     title="SIGN IN"
                                     color="#1569C7"
                                     onPress={() => {
-                                        this.props.navigation.navigate('ProductScreen')
+                                        this.props.navigation.navigate('Driver')
 
                                     }}
                                 >

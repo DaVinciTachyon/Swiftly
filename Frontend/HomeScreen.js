@@ -46,7 +46,7 @@ export default class HomeScreen extends React.Component {
                     size={15}
                     style={{height: 60, width: 10, marginTop: 500}}
                      onPress={() => {
-                         this.props.navigation.navigate('ProductScreen')
+                         this.props.navigation.navigate('Driver')
                          
                     }}
                    title="Make an Order"

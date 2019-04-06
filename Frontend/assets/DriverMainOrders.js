@@ -11,24 +11,22 @@ import{
 
 class DriverMainOrders extends React.Component{
 	state = {
-		products: [{	
-			name: "Address0,\nAddress,\nAddress,\nAddress", imageSrc:
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIpRXPIXfIUFnEv6ty3yEvfXKw302gugp-4XFlmsTENiLe-gjo"
+		orders: [{	
+			address: "38 St Malachy's Dr,\nGreenhills,\nDublin 12,\nD12 V9P6",screen:'Order1'
 		},{
-			name: "Address1,\nAddress,\nAddress,\nAddress", imageSrc:
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIpRXPIXfIUFnEv6ty3yEvfXKw302gugp-4XFlmsTENiLe-gjo"
+			address: "169 Balally Dr,\nBlackthorn,\nDublin 16,\nD16 XE67",screen:'Order1'
 		},{	
-			name: "Address2,\nAddress,\nAddress,\nAddress", imageSrc:
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIpRXPIXfIUFnEv6ty3yEvfXKw302gugp-4XFlmsTENiLe-gjo"
+			address: "29 Greencastle Dr,\nBonnybrook,\nDublin,\nD17 W273",screen:'Order1'
 		},{
-			name: "Address3,\nAddress,\nAddress,\nAddress", imageSrc:
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIpRXPIXfIUFnEv6ty3yEvfXKw302gugp-4XFlmsTENiLe-gjo"
+			address: "77 Ratoath Ave,\nFinglas South,\nDublin 11,\nD11 W285",screen:'Order1'
 		},{
-			name: "Address4,\nAddress,\nAddress,\nAddress", imageSrc:
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIpRXPIXfIUFnEv6ty3yEvfXKw302gugp-4XFlmsTENiLe-gjo"
+			address: "28 The Glen,\nBoden Park,\nRathfarnham,\nDublin 16,\nD16 N6C5",screen:'Order1'
 		},{
-			name: "Address5,\nAddress,\nAddress,\nAddress", imageSrc:
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIpRXPIXfIUFnEv6ty3yEvfXKw302gugp-4XFlmsTENiLe-gjo"
+			address: "29 Oldtown Ave,\nSantry,\nDublin 9,\nD09 WP48",screen:'Order1'
+		},{
+			address: "34 Seapark Rd,\nClontarf East,\nDublin 3,\nD03 HX77",screen:'Order1'
+		},{
+			address: "27 Charleston Ave,\nDublin 6,\nD06 KN72",screen:'Order1'
 		}]
 	}
 	render() {
@@ -38,16 +36,23 @@ class DriverMainOrders extends React.Component{
 				flexDirection: 'column'
 			}}>
 			{/*	selected orders - takes to all seleced orders	*/}
-				<TouchableOpacity
-					style={styles.button}
-					onPress={() => {
-						Alert.alert("selected orders screen")
-					}}
-				>
-					<Text style={[styles.labelText]}>
-						Selected Orders
-					</Text>
-				</TouchableOpacity>
+				<View style={{ flexDirection: "row", alignItems: "center" }}>
+					<View style={[styles.label,{width : '50%'}]}>
+						<Text style={[styles.labelText]}>
+							Selected Orders
+						</Text>
+					</View>
+					<TouchableOpacity
+						style={[styles.label,{width : '50%'}]}
+						onPress={
+							() => this.props.navigation.navigate('MarkersMap')
+						}
+					>
+						<Text style={[styles.labelText]}>
+							View On Map
+						</Text>
+					</TouchableOpacity>
+				</View>
 			{/*	flatlist of selected orders	*/}
 				<FlatList
 					ItemSeparatorComponent={() =>
@@ -55,33 +60,29 @@ class DriverMainOrders extends React.Component{
 							style={{ height: 1, width: "100%", backgroundColor: "lightgray" }}
 						/>
 					}
-					data={this.state.products}
-					keyExtractor={item => item.name}
+					data={this.state.orders}
+					keyExtractor={item => item.address}
 					renderItem={({ item }) =>
 						<TouchableOpacity
-							onPress={() => {
-								Alert.alert("order screen for:\n"+item.name)
-							}}
+							onPress={
+								() => this.props.navigation.navigate(item.screen)
+							}
 						>
 							<View style={{ flexDirection: "row", alignItems: "center" }}>
-								<Image
-									style={{ width: 50, height: 50 }}
-									source={{ uri: item.imageSrc }}
-								/>
-								<Text style={{ padding: 10 }}>{item.name}</Text>
+								<Text style={{ padding: 10 }}>{item.address}</Text>
 							</View>
 						</TouchableOpacity>
 					}
 				/>
 			{/*	available orders - takes to all available orders	*/}
 				<TouchableOpacity
-					style={styles.button}
-					onPress={() => {
-						Alert.alert("available orders screen")
-					}}
+					style={styles.label}
+					onPress={
+						() => this.props.navigation.navigate('AvailableOrders')
+					}
 				>
 					<Text style={[styles.labelText]}>
-						available Orders
+						Available Orders
 					</Text>
 				</TouchableOpacity>
 			</View>
@@ -91,9 +92,9 @@ class DriverMainOrders extends React.Component{
 export default DriverMainOrders;
 
 const styles = StyleSheet.create({
-  button: {
+  label: {
     alignItems: 'center',
-    backgroundColor: '#FF0000',
+    backgroundColor: '#1569C7',
     padding: 10
   },
   labelText: {
