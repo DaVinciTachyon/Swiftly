@@ -1,15 +1,14 @@
 
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet} from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Button} from 'react-native';
 import { FormLabel, FormInput, FormValidationMessage} from 'react-native-elements';
-
-
 
 
 export default class payment extends React.Component {
 
     render() {
         return (
+
             <View style={styles.regForm}>
              <Text style={styles.header}> Payment </Text>
             <TextInput style={styles.textInput} placeholder="Name"
@@ -24,9 +23,14 @@ export default class payment extends React.Component {
                     underlineColorAndroid={"transparent"} />
                 <TextInput style={styles.textInput} placeholder="CVC"
                     underlineColorAndroid={"transparent"} />
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonText}> Pay Now </Text>
-                </TouchableOpacity>
+                <Button style={styles.button}
+                    onPress={() => {
+                        this.props.navigation.navigate('orderReceived')
+
+                    }}
+                     title= 'Pay Now'
+                >
+                </Button>
               </View>
         );
    }
