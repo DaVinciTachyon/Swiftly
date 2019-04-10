@@ -9,7 +9,7 @@ import json
 from django.http import JsonResponse
 from .forms import UserCreationForm, UserChangeForm
 
-def register(request):
+def register(request): #does it work?
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -23,15 +23,21 @@ def register(request):
                 return JsonResponse({'id':id})
     return JsonResponse({'id':-1})
 
-# def orderIdItems(request):
-#     if request.method == 'POST':
-#         id = request.data
-#         items = OrderItem.objects.filter(order_id__exact=id)
-#         return JsonResponse(items)
-#     id = 1
-#     items = list(OrderItem.objects.filter(order_id__exact=id))
-#     return JsonResponse(items, safe=False)
-#     return JsonResponse({'id':-1})
+def orderIdItems(request):
+    if request.method == 'POST':
+        id = request.params['id']
+        items = {}  
+        items['items'] = []  
+        for item in OrderItemViewSet.queryset:
+            if(item.order_id == id):
+                items['items'].append({  
+                    'id': item.id,
+                    'order_id': item.order_id,
+                    'item_id': item.item_id,
+                    'quantity': item.quantity
+                })
+        return JsonResponse(items)
+    return JsonResponse({'id':-1})
 
 class UserViewSet(GenericViewSet,   # generic view functionality
                      CreateModelMixin,  # handles POSTs
