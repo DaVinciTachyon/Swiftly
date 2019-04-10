@@ -5,7 +5,7 @@ from .models import Order, PickUpLocation, User, AllItem, Cart, OrderItem, Locat
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ('url', 'id', 'email', 'username', 'alias', 'first_name', 'last_name', 'aboutme', 'avatar', 'date_joined', 'is_active', 'is_staff', 'is_available', 'home_coordinates', 'groups')
+        fields = ('url', 'id', 'email', 'username', 'alias', 'first_name', 'last_name', 'aboutme', 'avatar', 'date_joined', 'is_active', 'is_staff', 'is_available', 'home_address', 'home_longitude', 'home_latitude', 'groups')
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -20,7 +20,7 @@ class CartSerializer(serializers.HyperlinkedModelSerializer):
 class OrderSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Order
-        fields = ('url', 'id', 'user_id', 'driver_id', 'gross_cost', 'delivery_cost', 'net_cost', 'pick_up_location_id', 'drop_off_coordinates', 'is_open', 'is_complete')
+        fields = ('url', 'id', 'user_id', 'driver_id', 'gross_cost', 'delivery_cost', 'net_cost', 'pick_up_location_id', 'drop_off_address', 'longitude', 'latitude', 'is_open', 'is_complete')
 
 class OrderItemSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -30,7 +30,7 @@ class OrderItemSerializer(serializers.HyperlinkedModelSerializer):
 class PickUpLocationSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = PickUpLocation
-        fields = ('url', 'id', 'coordinates', 'phone_number', 'is_open', 'is_active')
+        fields = ('url', 'id', 'address', 'longitude', 'latitude', 'phone_number', 'is_open', 'is_active')
 
 class LocationItemSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
