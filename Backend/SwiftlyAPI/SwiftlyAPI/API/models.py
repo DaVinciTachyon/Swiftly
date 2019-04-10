@@ -49,15 +49,6 @@ class User(AbstractBaseUser, PermissionsMixin, models.Model):
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = ["email"]
 
-    def __str__(self):
-        return "@{}".format(self.username)
-    
-    def get_short_name(self):
-        return self.alias
-
-    def get_long_name(self):
-        return "{} @{}".format(self.alias, self.username)
-
 class Cart(models.Model):
     user_id = models.IntegerField()
     item_id = models.IntegerField()
