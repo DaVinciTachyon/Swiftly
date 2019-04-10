@@ -29,14 +29,15 @@ class App extends React.Component {
 
 
 const AppStackNavigator = createStackNavigator({
-    Home: HomeScreen,
+    loginScreen: loginScreen,
+	Home: HomeScreen,
     ProductScreen: ProductScreen,
     FoodScreen: FoodScreen,
     cartScreen: cartScreen,
     GamesScreen: GamesScreen,
     UtensilsScreen: UtensilsScreen,
     DecorScreen: DecorScreen,
-    loginScreen: loginScreen,
+    
     payment: payment,
     orderReceived: orderReceived,
     extrasScreen: extrasScreen,

@@ -4,7 +4,7 @@ import {
     TouchableWithoutFeedback, StatusBar,
     TextInput, SafeAreaView, Keyboard, TouchableOpacity,
     KeyboardAvoidingView, Button, ImageBackground, Dimensions
-} from 'react-native'
+} from 'react-native';
 
 export default class Login extends Component {
     render() {
@@ -27,6 +27,7 @@ export default class Login extends Component {
                                     placeholderTextColor='black'
                                     keyboardType='email-address'
                                     returnKeyType='next'
+									onEndEditing={(text) => this.setState({text})}
                                     autoCorrect={false}
                                     onSubmitEditing={() => this.refs.txtPassword.focus()}
                                 />
@@ -38,15 +39,24 @@ export default class Login extends Component {
                                     autoCorrect={false}
                                     ref={"txtPassword"}
                                 />
-                                <Button style={styles.buttonContainer}
-                                    title="SIGN IN"
-                                    color="#1569C7"
-                                    onPress={() => {
-                                        this.props.navigation.navigate('ProductScreen')
-
-                                    }}
-                                >
-                                </Button>
+								{/*	Temporary until login is sorted	*/}
+								<TouchableOpacity
+									onPress={() => {
+										this.props.navigation.navigate('Home')
+									}}
+									onLongPress={()=>{
+										this.props.navigation.navigate('Driver',{url: 'nope'})
+									}}
+								>
+								<Button
+									title="SIGN IN"
+									color="#1569C7"
+									disabled={true}
+										onPress={() => {
+											this.props.navigation.navigate('Home')
+										}}
+								/>
+								</TouchableOpacity>
                             </View>
                         </View>
                     </TouchableWithoutFeedback>
