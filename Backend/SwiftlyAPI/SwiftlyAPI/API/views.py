@@ -13,6 +13,29 @@ from rest_framework.permissions import AllowAny
 #    serializer_class = NewUserSerializer
 #    permission_classes = (permissions.AllowAny,)
 
+from django.http import HttpResponse
+from .forms import UserCreationForm, UserChangeForm
+
+def register(request):
+    if request.method == 'GET':
+            form = UserCreationForm()
+    else:
+        form = UserCreationForm(request.POST)
+        # If data is valid, proceeds to create a new post and redirect the user
+        #if form.is_valid():
+        #    content = form.cleaned_data['content']
+        #    created_at = form.cleaned_data['created_at']
+        #    post = m.Post.objects.create(content=content,
+        #                                created_at=created_at)
+        #    return HttpResponseRedirect(reverse('post_detail',
+        #                                        kwargs={'post_id': post.id}))
+        return HttpResponseRedirect(reverse, kwargs={'id': 4})
+    return render(request, 'register/register_form_upload.html', {
+        'form': form,
+    })
+    #form = UserCreationForm()
+    #return HttpResponse(form)
+
 class UserViewSet(GenericViewSet,   # generic view functionality
                      CreateModelMixin,  # handles POSTs
                      RetrieveModelMixin,    # handles GETs for 1
