@@ -71,7 +71,7 @@ class Order(models.Model):
     net_cost = models.FloatField()
     pick_up_location_id = models.IntegerField()
     drop_off_coordinates = models.CharField(max_length=150, default='')
-    has_driver = models.BooleanField(default=False)
+    is_open = models.BooleanField(default=False)
     is_complete = models.BooleanField(default=False)
 
     class Meta:
