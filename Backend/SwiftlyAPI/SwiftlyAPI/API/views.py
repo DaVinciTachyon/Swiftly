@@ -9,6 +9,15 @@ import json
 from django.http import JsonResponse
 from .forms import UserCreationForm, UserChangeForm
 
+# from rest_framework.authentication import SessionAuthentication, BasicAuthentication 
+
+# class CsrfExemptSessionAuthentication(SessionAuthentication):
+
+#     def enforce_csrf(self, request):
+#         return  # To not perform the csrf check previously happening
+
+# authentication_classes = (CsrfExemptSessionAuthentication, BasicAuthentication)
+
 def register(request): #does it work?
     if request.method == 'POST':
         form = UserCreationForm(request.POST)

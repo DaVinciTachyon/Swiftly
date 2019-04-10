@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    #'rest_framework.authtoken'
+    #'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -51,8 +51,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-CSRF_COOKIE_SECURE = False
 
 ROOT_URLCONF = 'SwiftlyAPI.urls'
 
@@ -108,7 +106,6 @@ REST_FRAMEWORK = {
     #'DEFAULT_AUTHENTICATION_CLASSES': (
     #    'rest_framework.authentication.BasicAuthentication',
     #    'rest_framework.authentication.SessionAuthentication',
-    #    'rest_framework.authentication.RemoteUserAuthentication'
     #),
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
 }
