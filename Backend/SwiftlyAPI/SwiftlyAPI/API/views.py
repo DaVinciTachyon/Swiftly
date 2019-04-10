@@ -19,8 +19,9 @@ def register(request):
             password1 = form.cleaned_data['password1']
             password2 = form.cleaned_data['password2']
             if(password1 == password2):
-                User.objects.create_user(email, username, password)
-                return JsonResponse({'id':4})
+                User.objects.create_user(email, username, password1)
+                id = User.objects.filter(email__exact=email).values('id')
+                return JsonResponse({'id':id})
     return JsonResponse({'id':-1})
 
 # def login(request):
