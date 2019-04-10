@@ -3,7 +3,7 @@ import {
     StyleSheet, Text, View, Image,
     TouchableWithoutFeedback, StatusBar,
     TextInput, SafeAreaView, Keyboard, TouchableOpacity,
-    KeyboardAvoidingView, Button
+    KeyboardAvoidingView, Button, ImageBackground, Dimensions
 } from 'react-native'
 
 export default class Login extends Component {
@@ -17,7 +17,7 @@ export default class Login extends Component {
                         <View style={styles.logoContainer}>
                             <View style={styles.logoContainer}>
                                 <Image style={styles.logo}
-                                    source={require('./logo.png')}>
+                                    source={{ uri: "https://dejpknyizje2n.cloudfront.net/svgcustom/clipart/preview/rocket-ship-2969-14241-300x300.png" }}>
                                 </Image>
                                 <Text style={styles.title}>Swiftly</Text>
                             </View>
@@ -42,7 +42,7 @@ export default class Login extends Component {
                                     title="SIGN IN"
                                     color="#1569C7"
                                     onPress={() => {
-                                        this.props.navigation.navigate('Driver')
+                                        this.props.navigation.navigate('ProductScreen')
 
                                     }}
                                 >
@@ -50,7 +50,7 @@ export default class Login extends Component {
                             </View>
                         </View>
                     </TouchableWithoutFeedback>
-                </KeyboardAvoidingView>
+                    </KeyboardAvoidingView>
             </SafeAreaView>
         );
     }
@@ -67,8 +67,8 @@ const styles = StyleSheet.create({
         flex: 1
     },
     logo: {
-        width: 128,
-        height: 56,
+        width: 50,
+        height: 50,
     },
     title: {
         color: 'black',

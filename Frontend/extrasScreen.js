@@ -1,25 +1,25 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, SafeAreaView, FlatList, Button, ImageBackground, Dimensions} from 'react-native';
 import { SearchBar, CheckBox, Icon } from 'react-native-elements';
+import { Header } from 'react-native-elements';
+import loginScreen from './loginScreen.js';
+import FoodScreen from './FoodScreen.js';
 
-
-export default class GamesScreen extends React.Component {
+export default class ProductScreen extends React.Component {
 
     state = {
         products: [
-            { name: "Monopoly", imageSrc: "https://i5.walmartimages.com/asr/e9009e67-fbb0-4e96-83c5-5af0eeb13b28_1.f17117ff29f8aa4992cb93bad9205dc4.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF" },
-            { name: "Beer Pong", imageSrc: "https://images-na.ssl-images-amazon.com/images/I/41gkfuE64VL._SX425_.jpg"},
-            { name: "Cluedo", imageSrc: "https://image.smythstoys.com/original/desktop/152077.jpg" }
-
+            { name: "Party Bags", imageSrc: "https://static.scdn4.secure.raxcdn.com/images/party-bags-fillers/cello-bags-link.jpg" },
+            { name: "Party Poppers", imageSrc: "https://upload.wikimedia.org/wikipedia/commons/8/82/Party_poppers.jpg"},
+            { name: "Invitations", imageSrc: "https://cms.cloudinary.vpsvc.com//image/fetch/t_sitecore_images/f_auto,dpr_auto,w_700/https://s3-eu-west-1.amazonaws.com/sitecore-media-bucket/prod%2Fen%2F%7BEBF36B86-1BA5-4BEB-BA81-9D99C4D50510%7D" }
         ]
 
     };
 
-
-
     render() {
         const { search } = this.state;
         return (
+
             <SafeAreaView>
 
                 <ImageBackground

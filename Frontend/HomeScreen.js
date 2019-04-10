@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image} from 'react-native';
+import { StyleSheet, Text, View, Image, ImageBackground, Dimensions } from 'react-native';
 import { SearchBar, Button } from 'react-native-elements';
 
 import ProductScreen from './ProductScreen.js';
@@ -24,6 +24,10 @@ export default class HomeScreen extends React.Component {
 
             <View style={styles.container}>
 
+                <ImageBackground
+                    style={{ height: Dimensions.get('window').height, width: Dimensions.get('window').width }}
+                    source={{uri: "https://previews.123rf.com/images/syntheticmessiah/syntheticmessiah1707/syntheticmessiah170700012/81891385-stone-texture-background-of-brick-wall-texture-surface-with-stone-light-yellow-bricks.jpg"}}
+                 >
                 <Image
                     style={{ width: 90, height: 90, flexDirection: 'row', right: 150, left: 150, marginTop: 50 }}
                     source={{ uri: "https://dejpknyizje2n.cloudfront.net/svgcustom/clipart/preview/rocket-ship-2969-14241-300x300.png" }}
@@ -46,25 +50,14 @@ export default class HomeScreen extends React.Component {
                     size={15}
                     style={{height: 60, width: 10, marginTop: 500}}
                      onPress={() => {
-                         this.props.navigation.navigate('Driver')
+                         this.props.navigation.navigate('ProductScreen')
                          
                     }}
                    title="Make an Order"
                    color= "#FF0000"
                 />
 
-                <Button
-                    type="solid"
-                    size={15}
-                    style={{ height: 60, width: 10, marginTop: 600 }}
-                    onPress={() => {
-                        this.props.navigation.navigate('cartScreen')
-
-                    }}
-                    title="Payment"
-                    color="#FF0000"
-                />
-       
+                </ImageBackground>
                 </View>
         );
    }
