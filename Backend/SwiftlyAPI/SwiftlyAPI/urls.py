@@ -20,7 +20,6 @@ from SwiftlyAPI.API import views
 
 router = routers.DefaultRouter()
 router.register(r'user', views.UserViewSet)
-#router.register(r'newuser', views.NewUserViewSet)
 router.register(r'groups', views.GroupViewSet)
 router.register(r'pickuplocation', views.PickUpLocationViewSet)
 router.register(r'order', views.OrderViewSet)
@@ -35,6 +34,8 @@ Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
-    #url(r'^api-token-auth/', 'rest_framework.authtoken.views.obtain_auth_token')
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('register/', views.register),
+#    path('login/', views.login),
+#    url(r'^api-token-auth/', 'rest_framework.authtoken.views.obtain_auth_token'),
 ]

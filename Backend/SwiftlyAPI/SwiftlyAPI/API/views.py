@@ -6,12 +6,30 @@ from .serializers import OrderSerializer, GroupSerializer, PickUpLocationSeriali
 from django.contrib.auth.models import Group
 from rest_framework.permissions import AllowAny
 
-#class NewUserViewSet(GenericViewSet,   # generic view functionality
-#                    CreateModelMixin,  # handles POSTs
-#                    permissions.AllowAny): #handles permission
-#    queryset = User.objects.all()
-#    serializer_class = NewUserSerializer
-#    permission_classes = (permissions.AllowAny,)
+import json
+from django.http import JsonResponse
+from .forms import UserCreationForm, UserChangeForm
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            username = form.cleaned_data['username']
+            password1 = form.cleaned_data['password1']
+            password2 = form.cleaned_data['password2']
+            if(password1 == password2):
+                User.objects.create_user(email, username, password1)
+                id = User.objects.filter(email__exact=email).values('id')
+                return JsonResponse({'id':id})
+    return JsonResponse({'id':-1})
+
+# def login(request):
+#     if request.method == 'POST':
+#         form = UserCreationForm(request.POST)
+#         if form.is_valid():
+#             return JsonResponse({'id':4})
+#     return JsonResponse({'id':-1})
 
 class UserViewSet(GenericViewSet,   # generic view functionality
                      CreateModelMixin,  # handles POSTs

@@ -29,6 +29,12 @@ class UserManager(BaseUserManager):
         user.save()
         return user
     
+#models.py
+import os
+
+def get_image_path(instance, filename):
+    return os.path.join('SwiftlyAPI/media', filename)
+
 class User(AbstractBaseUser, PermissionsMixin, models.Model):
     email = models.EmailField(verbose_name='email address', unique=True)
     username = models.CharField(max_length=25, unique=True, default='')
@@ -36,27 +42,18 @@ class User(AbstractBaseUser, PermissionsMixin, models.Model):
     first_name = models.CharField(max_length=40, default='')
     last_name = models.CharField(max_length=40, default='')
     aboutme = models.CharField(max_length=140, default='')
-    avatar = models.ImageField(blank=True, null=True)
+    avatar = models.ImageField(upload_to=get_image_path, blank=True, null=True)
     date_joined = models.DateTimeField(default=timezone.now)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_available = models.BooleanField(default=False)
-    home_coordinates = models.CharField(max_length=30, default='')
+    home_coordinates = models.CharField(max_length=150, default='')
     #card details
 
     objects = UserManager()
 
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = ["email"]
-
-    def __str__(self):
-        return "@{}".format(self.username)
-    
-    def get_short_name(self):
-        return self.alias
-
-    def get_long_name(self):
-        return "{} @{}".format(self.alias, self.username)
 
 class Cart(models.Model):
     user_id = models.IntegerField()
@@ -73,8 +70,8 @@ class Order(models.Model):
     delivery_cost = models.FloatField()
     net_cost = models.FloatField()
     pick_up_location_id = models.IntegerField()
-    drop_off_coordinates = models.CharField(max_length=30, default='')
-    has_driver = models.BooleanField(default=False)
+    drop_off_coordinates = models.CharField(max_length=150, default='')
+    is_open = models.BooleanField(default=False)
     is_complete = models.BooleanField(default=False)
 
     class Meta:
@@ -89,7 +86,7 @@ class OrderItem(models.Model):
         ordering = ('id',)
 
 class PickUpLocation(models.Model):
-    coordinates = models.CharField(max_length=30, default='')
+    coordinates = models.CharField(max_length=150, default='')
     phone_number = models.IntegerField()
     is_open = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)
