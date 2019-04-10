@@ -20,7 +20,7 @@ class CartSerializer(serializers.HyperlinkedModelSerializer):
 class OrderSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Order
-        fields = ('url', 'id', 'user_id', 'driver_id', 'gross_cost', 'delivery_cost', 'net_cost', 'pick_up_location_id', 'drop_off_address', 'longitude', 'latitude', 'is_open', 'is_complete')
+        fields = ('url', 'id', 'user_id', 'driver_id', 'gross_cost', 'delivery_cost', 'net_cost', 'pick_up_location_id', 'drop_off_address', 'drop_off_longitude', 'drop_off_latitude', 'is_open', 'is_complete')
 
 class OrderItemSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
