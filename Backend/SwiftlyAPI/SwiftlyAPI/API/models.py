@@ -47,7 +47,9 @@ class User(AbstractBaseUser, PermissionsMixin, models.Model):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_available = models.BooleanField(default=False)
-    home_coordinates = models.CharField(max_length=150, default='')
+    home_address = models.TextField()
+    home_latitude = models.FloatField()
+    home_longitude = models.FloatField()
     #card details
 
     objects = UserManager()
@@ -70,7 +72,9 @@ class Order(models.Model):
     delivery_cost = models.FloatField()
     net_cost = models.FloatField()
     pick_up_location_id = models.IntegerField()
-    drop_off_coordinates = models.CharField(max_length=150, default='')
+    drop_off_address = models.TextField()
+    drop_off_latitude = models.FloatField()
+    drop_off_longitude = models.FloatField()
     is_open = models.BooleanField(default=False)
     is_complete = models.BooleanField(default=False)
 
@@ -86,7 +90,9 @@ class OrderItem(models.Model):
         ordering = ('id',)
 
 class PickUpLocation(models.Model):
-    coordinates = models.CharField(max_length=150, default='')
+    address = models.TextField()
+    latitude = models.FloatField()
+    longitude = models.FloatField()
     phone_number = models.IntegerField()
     is_open = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)

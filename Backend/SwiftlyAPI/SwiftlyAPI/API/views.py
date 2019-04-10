@@ -24,13 +24,6 @@ def register(request):
                 return JsonResponse({'id':id})
     return JsonResponse({'id':-1})
 
-# def login(request):
-#     if request.method == 'POST':
-#         form = UserCreationForm(request.POST)
-#         if form.is_valid():
-#             return JsonResponse({'id':4})
-#     return JsonResponse({'id':-1})
-
 class UserViewSet(GenericViewSet,   # generic view functionality
                      CreateModelMixin,  # handles POSTs
                      RetrieveModelMixin,    # handles GETs for 1
