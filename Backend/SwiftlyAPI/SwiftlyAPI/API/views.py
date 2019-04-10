@@ -5,7 +5,6 @@ from .models import Order, PickUpLocation, User, AllItem, Cart, OrderItem, Locat
 from .serializers import OrderSerializer, GroupSerializer, PickUpLocationSerializer, UserSerializer, AllItemSerializer, CartSerializer, OrderItemSerializer, LocationItemSerializer#, NewUserSerializer
 from django.contrib.auth.models import Group
 from rest_framework.permissions import AllowAny
-
 import json
 from django.http import JsonResponse
 from .forms import UserCreationForm, UserChangeForm
@@ -23,6 +22,16 @@ def register(request):
                 id = User.objects.filter(email__exact=email).values('id')
                 return JsonResponse({'id':id})
     return JsonResponse({'id':-1})
+
+# def orderIdItems(request):
+#     if request.method == 'POST':
+#         id = request.data
+#         items = OrderItem.objects.filter(order_id__exact=id)
+#         return JsonResponse(items)
+#     id = 1
+#     items = list(OrderItem.objects.filter(order_id__exact=id))
+#     return JsonResponse(items, safe=False)
+#     return JsonResponse({'id':-1})
 
 class UserViewSet(GenericViewSet,   # generic view functionality
                      CreateModelMixin,  # handles POSTs
