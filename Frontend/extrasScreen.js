@@ -5,7 +5,8 @@ import { Header } from 'react-native-elements';
 import loginScreen from './loginScreen.js';
 import FoodScreen from './FoodScreen.js';
 
-export default class ProductScreen extends React.Component {
+{/* screen made in a similiar manner to the product screen but uses a flatlist to show the extra products provided */}
+export default class extrasScreen extends React.Component {
 
     state = {
         products: [
