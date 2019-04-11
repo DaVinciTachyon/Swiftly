@@ -27,7 +27,7 @@ class App extends React.Component {
     }
 }
 
-
+{/* stack created that pushes and pops each screen as the user interacts with them */}
 const AppStackNavigator = createStackNavigator({
     loginScreen: loginScreen,
 	Home: HomeScreen,
