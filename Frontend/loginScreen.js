@@ -8,6 +8,9 @@ import {
 
 const {ipAndPort} = '';
 
+{/*this screen is where a user/driver logins into the app using their credentials - it is connected to the database where depending on their
+credentials it brings them to a different side of the app, the consumer side or the driver side respectively.
+It implements a text input bar, a keyboard, and a login button. The password is also encrypted*/}
 export default class Login extends Component {
 	// ip and port are specific to the computer the server is being run on
 	ipAndPort = '10.6.29.26:8000';
