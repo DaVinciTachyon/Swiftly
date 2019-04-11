@@ -6,7 +6,12 @@ import {
     KeyboardAvoidingView, Button, ImageBackground, Dimensions
 } from 'react-native';
 
+const {ipAndPort} = '';
+
 export default class Login extends Component {
+	// ip and port are specific to the computer the server is being run on
+	ipAndPort = '10.6.29.26:8000';
+	
     render() {
         return (
             <SafeAreaView style={styles.container}>
@@ -42,10 +47,10 @@ export default class Login extends Component {
 								{/*	Temporary until login is sorted	*/}
 								<TouchableOpacity
 									onPress={() => {
-										this.props.navigation.navigate('Home')
+										this.props.navigation.navigate('Home',{url: this.ipAndPort})
 									}}
 									onLongPress={()=>{
-										this.props.navigation.navigate('Driver',{url: 'nope'})
+										this.props.navigation.navigate('Driver',{url: this.ipAndPort})
 									}}
 								>
 								<Button

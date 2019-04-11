@@ -5,8 +5,12 @@ import { Header } from 'react-native-elements';
 import loginScreen from './loginScreen.js';
 import FoodScreen from './FoodScreen.js';
 
+const {url} = '';
+
 export default class ProductScreen extends React.Component {
 
+	url = this.props.navigation.getParam('url', 'noo');
+	
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -23,7 +27,7 @@ export default class ProductScreen extends React.Component {
 			- port server is on
 			- specfic to data being queryied
 		*/}
-		fetch("http://10.6.3.113:8000/allitem/")
+		fetch('http://'+this.url+'/allitem/')
 		.then(response => response.json())
 		.then((responseJson)=> {
 			this.setState({
@@ -35,7 +39,7 @@ export default class ProductScreen extends React.Component {
 	}
 	
 	addToCart(item){
-		fetch('http://10.6.3.113:8000/cart/', {
+		fetch('http://'+this.url+'/cart/', {
 			method: 'POST',
 			headers: {
 				Accept: 'application/json',
@@ -67,7 +71,6 @@ export default class ProductScreen extends React.Component {
 			)
 		}
         return (
-
             <SafeAreaView>
 
                 <ImageBackground
@@ -87,19 +90,19 @@ export default class ProductScreen extends React.Component {
 
 					<View style={styles.iconContainer}>
 					  
-					   <Icon 
+					  { /*  <Icon 
 						 reverse
 						 name='male'
 						 type='font-awesome'
 						 color='#1569C7'
 						 onPress={() => this.props.navigation.navigate('loginScreen')} />
-
+	*/}
 						<Icon
 							reverse
 							name='shopping-cart'
 							type='font-awesome'
 							 color='#1569C7'
-							 onPress={() => this.props.navigation.navigate('cartScreen')} />      
+							 onPress={() => this.props.navigation.navigate('cartScreen', {url: this.url})} />      
 					
 					</View>
 
@@ -182,8 +185,8 @@ export default class ProductScreen extends React.Component {
                             style={{ height: 1, width: "100%", backgroundColor: "lightgray" }}
                         />
                     }
-                    data={this.state.dataSource.results}
-                    keyExtractor={item => item.id}
+                    data={this.state.dataSource}
+                    keyExtractor={item => item.url}
                         renderItem={({ item }) =>
                             <View style={{ flexDirection: "row", alignItems: "center"}}>
                             <Image
