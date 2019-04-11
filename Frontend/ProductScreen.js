@@ -90,13 +90,12 @@ export default class ProductScreen extends React.Component {
 
 					<View style={styles.iconContainer}>
 					  
-					  { /*  <Icon 
+					        <Icon 
 						 reverse
 						 name='male'
 						 type='font-awesome'
 						 color='#1569C7'
 						 onPress={() => this.props.navigation.navigate('loginScreen')} />
-	*/}
 						<Icon
 							reverse
 							name='shopping-cart'
