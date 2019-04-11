@@ -6,6 +6,9 @@ import FoodScreen from './FoodScreen.js';
 
 const {url} = '';
 
+{/* this screen takes the information added to the database from the user when they click an item to add to the cart. It fetches the added data
+and displays the item id in a form of a list */}
+
 export default class CartScreen extends React.Component {
 
 	url = this.props.navigation.getParam('url', 'noo');
