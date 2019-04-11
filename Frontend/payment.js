@@ -3,6 +3,7 @@ import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Button} from 'react-native';
 import { FormLabel, FormInput, FormValidationMessage} from 'react-native-elements';
 
+{/* this screen uses a form and the user can add their card information and their details to purchase items that they have added to their cart */}
 
 export default class payment extends React.Component {
 
