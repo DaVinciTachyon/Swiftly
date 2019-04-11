@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, ImageBackground, Dimensions } from 'react-native';
 import { Button } from 'react-native-elements';
 
+{/* this screen is made to show that the users payment was authorized */}
 export default class orderReceived extends React.Component {
     render() {
         return (
