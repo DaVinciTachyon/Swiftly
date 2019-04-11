@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Image, SafeAreaView, FlatList, Button, ImageBac
 import { SearchBar, CheckBox, Icon } from 'react-native-elements';
 
 
-
+{/* screen made in a similiar manner to the product screen but uses a flatlist to show the decor products provided */}
 export default class FoodScreen extends React.Component {
 
     state = {
