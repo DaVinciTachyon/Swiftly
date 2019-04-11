@@ -2,8 +2,8 @@
   "devToolsPort": 19002,
   "expoServerPort": 19000,
   "packagerPort": 19001,
-  "packagerPid": 8044,
-  "expoServerNgrokUrl": "https://bi-ae7.cannonci.frontend.exp.direct",
-  "packagerNgrokUrl": "https://packager.bi-ae7.cannonci.frontend.exp.direct",
-  "ngrokPid": 2292
+  "packagerPid": 14012,
+  "expoServerNgrokUrl": "https://xb-t62.cannonci.frontend.exp.direct",
+  "packagerNgrokUrl": "https://packager.xb-t62.cannonci.frontend.exp.direct",
+  "ngrokPid": 14404
 }

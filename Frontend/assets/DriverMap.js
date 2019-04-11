@@ -1,54 +1,40 @@
 import React from 'react';
-import{
-	Constants,
-	MapView,
-	Location,
-	Permissions,
-	Marker
-} from 'expo';
-import{
-	StyleSheet,
-	Text,
-	View
-} from 'react-native';
+import{Constants,MapView,Location,Permissions,Marker} from 'expo';
+import{StyleSheet,Text,View} from 'react-native';
 import MapViewDirections from './MapViewDirections';
 
-const LATITUDE = 53.35;
-const LONGITUDE = -6.48;
+const LATITUDE = 53.343537;
+const LONGITUDE = -6.250267;
 const DELTA = 0.11;
 const GOOGLE_MAPS_APIKEY = 'AIzaSyCYvMpmVhFc0ydILEuXGJNYNGFnBoKPCL8';
 
+const {lat} = 1;
+const {long} = 1;
 
 class DriverMap extends React.Component{
-
-	state = {
-		mapRegion: {
-			latitude: null,
-			longitude: null,
-			latitudeDelta: null,
-			longitudeDelta: null
-		},
-		locationResult: null,
-		location: {coords: { latitude: LATITUDE, longitude: LONGITUDE}},
-		markers:[
-			{
-				title:'depot',
+	
+	lat = this.props.navigation.getParam('lat', 1);
+	long = this.props.navigation.getParam('long', 1);
+	
+	constructor(props) {
+		{/* holds data fetched to be displayed */}
+		super(props);
+		this.state = {
+			mapRegion: {
+				latitude: null,
+				longitude: null,
+				latitudeDelta: null,
+				longitudeDelta: null
+			},
+			locationResult: null,
+			location: {coords: { latitude: LATITUDE, longitude: LONGITUDE}},
+			marker:{
 				coordinates:{
-					latitude:53.3,
-					longitude:-6.4
-				}
-			},{
-				title:'second',
-				coordinates:{
-					latitude:53.37,
-					longitude:-6.19
+					latitude:53.310627,
+					longitude:-6.334087
 				}
 			}
-		]
-	}
-	
-	componentDidMount() {
-		this._getLocationAsync();
+		};
 	}
 	
 	_handleMapRegionChange = mapRegion => {
@@ -86,7 +72,10 @@ class DriverMap extends React.Component{
 				
 					<MapViewDirections
 						origin={this.state.location.coords}
-						destination={this.state.markers[0].coordinates}
+						destination={LatLng={
+							latitude: this.lat,
+							longitude: this.long,
+						}}
 						apikey={GOOGLE_MAPS_APIKEY}
 						strokeWidth={5}
   						strokeColor="#FF0000"
@@ -94,18 +83,15 @@ class DriverMap extends React.Component{
   						onError={this.onError}
 					/>
 					<MapView.Marker
-						coordinate={this.state.markers[0].coordinates}
+						coordinate={LatLng={
+							latitude: this.lat,
+							longitude: this.long,
+						}}
 					/>
 				</MapView>
-				{/*		put in initialRegion to start map over warehouse
-						latitude: this.state.location.coords.latitude,
-						longitude: this.state.location.coords.longitude,
-						
-						under mapview??
-						showsTraffic = {true}
-						onRegionChange={this._handleMapRegionChange}
-				*/}
-				<Text>
+				<Text
+					style={{color:'#FFFFFF'}}
+				>
 				{/*	BUG - to be left in for my location button to show	*/}
 					{this.state.locationResult}
 				</Text>

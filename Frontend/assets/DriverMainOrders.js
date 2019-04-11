@@ -6,82 +6,117 @@ import{
 	FlatList,
 	Image,
 	Alert,
-	TouchableOpacity
+	TouchableOpacity,
+	ActivityIndicator
 } from 'react-native';
 
+const {url} = '';
+
 class DriverMainOrders extends React.Component{
-	state = {
-		products: [{	
-			name: "Address0,\nAddress,\nAddress,\nAddress", imageSrc:
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIpRXPIXfIUFnEv6ty3yEvfXKw302gugp-4XFlmsTENiLe-gjo"
-		},{
-			name: "Address1,\nAddress,\nAddress,\nAddress", imageSrc:
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIpRXPIXfIUFnEv6ty3yEvfXKw302gugp-4XFlmsTENiLe-gjo"
-		},{	
-			name: "Address2,\nAddress,\nAddress,\nAddress", imageSrc:
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIpRXPIXfIUFnEv6ty3yEvfXKw302gugp-4XFlmsTENiLe-gjo"
-		},{
-			name: "Address3,\nAddress,\nAddress,\nAddress", imageSrc:
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIpRXPIXfIUFnEv6ty3yEvfXKw302gugp-4XFlmsTENiLe-gjo"
-		},{
-			name: "Address4,\nAddress,\nAddress,\nAddress", imageSrc:
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIpRXPIXfIUFnEv6ty3yEvfXKw302gugp-4XFlmsTENiLe-gjo"
-		},{
-			name: "Address5,\nAddress,\nAddress,\nAddress", imageSrc:
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIpRXPIXfIUFnEv6ty3yEvfXKw302gugp-4XFlmsTENiLe-gjo"
-		}]
+	
+	url = this.props.navigation.getParam('url', 'noo');
+	
+	constructor(props) {
+		{/* holds data fetched to be displayed */}
+		super(props);
+		this.state = {
+			url: "lul",
+			loading: true,
+			dataSource:[]
+		};
 	}
+	
+	componentDidMount(){
+		{/* url
+			- ipv4 address of machine server is running on(on same network)
+			- port server is on
+			- specfic to data being queryied
+		*/}
+		fetch('http://'+this.url+'/pickuplocation/')
+		.then(response => response.json())
+		.then((responseJson)=> {
+			this.setState({
+				loading: false,
+				dataSource: responseJson
+			})
+		})
+		.catch(error=>console.log(error)) //to catch the errors if any
+	}
+
+	renderOrder(item){
+		if(!item.is_open){
+			return;
+		}
+		return(
+			<TouchableOpacity
+				onPress={
+					() => this.props.navigation.navigate('Order1',{lat: item.latitude, long: item.longitude})
+				}
+			>
+				<View style={{ flexDirection: "row", alignItems: "center" }}>
+					<Text style={{ padding: 10 }}>{item.address}</Text>
+				</View>
+			</TouchableOpacity>
+		);
+	}
+
 	render() {
+		{/* for when data has not loaded in, loading screen	*/}
+		if(this.state.loading){
+			return( 
+				<View style={styles.loader}> 
+					<ActivityIndicator size="large" color="#0c9"/>
+				</View>
+			)
+		}
+		
 		return (
 			<View style={{
 				flex: 1,
 				flexDirection: 'column'
 			}}>
-			{/*	selected orders - takes to all seleced orders	*/}
-				<TouchableOpacity
-					style={styles.button}
-					onPress={() => {
-						Alert.alert("selected orders screen")
-					}}
-				>
-					<Text style={[styles.labelText]}>
-						Selected Orders
-					</Text>
-				</TouchableOpacity>
-			{/*	flatlist of selected orders	*/}
+			{/*	orders views into column	*/}
+				<View style={{ flexDirection: "row", alignItems: "center" }}>
+					{/* selected orders label */}
+					<View style={[styles.label,{width : '50%'}]}>
+						<Text style={[styles.labelText]}>
+							Selected Orders
+						</Text>
+					</View>
+					{/* view on map option - takes to a map with a marker for each order */}
+					<TouchableOpacity
+						style={[styles.label,{width : '50%'}]}
+						onPress={
+							() => this.props.navigation.navigate('MarkersMap',{url: this.url})
+						}
+					>
+						<Text style={[styles.labelText]}>
+							View On Map
+						</Text>
+					</TouchableOpacity>
+				</View>
+				{/*	flatlist of selected orders	*/}
 				<FlatList
 					ItemSeparatorComponent={() =>
 						<View
 							style={{ height: 1, width: "100%", backgroundColor: "lightgray" }}
 						/>
 					}
-					data={this.state.products}
-					keyExtractor={item => item.name}
-					renderItem={({ item }) =>
-						<TouchableOpacity
-							onPress={() => {
-								Alert.alert("order screen for:\n"+item.name)
-							}}
-						>
-							<View style={{ flexDirection: "row", alignItems: "center" }}>
-								<Image
-									style={{ width: 50, height: 50 }}
-									source={{ uri: item.imageSrc }}
-								/>
-								<Text style={{ padding: 10 }}>{item.name}</Text>
-							</View>
-						</TouchableOpacity>
-					}
+					data={this.state.dataSource}
+					extraData={this.state}
+					keyExtractor={item => item.url}
+					renderItem={({item}) => this.renderOrder(item)}
+					
 				/>
-			{/*	available orders - takes to all available orders	*/}
+				{/*	available orders - takes to all available orders	*/}
 				<TouchableOpacity
-					style={styles.button}
-					onPress={() => {
-						Alert.alert("available orders screen")
-					}}
+					style={styles.label}
+					onPress={
+						() => this.props.navigation.navigate('AvailableOrders',{url: this.url})
+					}
 				>
 					<Text style={[styles.labelText]}>
-						available Orders
+						Available Orders
 					</Text>
 				</TouchableOpacity>
 			</View>
@@ -91,9 +126,9 @@ class DriverMainOrders extends React.Component{
 export default DriverMainOrders;
 
 const styles = StyleSheet.create({
-  button: {
+  label: {
     alignItems: 'center',
-    backgroundColor: '#FF0000',
+    backgroundColor: '#1569C7',
     padding: 10
   },
   labelText: {
