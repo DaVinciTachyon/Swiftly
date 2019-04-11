@@ -4,6 +4,8 @@ import { SearchBar, Button } from 'react-native-elements';
 
 import ProductScreen from './ProductScreen.js';
 
+{/* screen made with search bar so the user can type their location and access the product screen */}
+
 const {url} = '';
 
 export default class HomeScreen extends React.Component {
