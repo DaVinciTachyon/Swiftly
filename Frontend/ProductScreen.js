@@ -5,7 +5,10 @@ import { Header } from 'react-native-elements';
 import loginScreen from './loginScreen.js';
 import FoodScreen from './FoodScreen.js';
 
+
 const {url} = '';
+
+{/* this screen takes the products specifically drink products from the database and displays them in a flatlist on the user interface */}
 
 export default class ProductScreen extends React.Component {
 
