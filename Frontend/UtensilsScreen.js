@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, SafeAreaView, FlatList, Button, ImageBackground, Dimensions } from 'react-native';
 import { SearchBar, CheckBox, Icon } from 'react-native-elements';
 
+{/* screen made in a similiar manner to the product screen but uses a flatlist to show the utensils provided */}
 export default class UtensilsScreen extends React.Component {
 
     state = {
