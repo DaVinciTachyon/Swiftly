@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, SafeAreaView, FlatList, Button, ImageBackground, Dimensions} from 'react-native';
 import { SearchBar, CheckBox, Icon } from 'react-native-elements';
 
-
+{/* screen made in a similiar manner to the product screen but uses a flatlist to show the games provided */}
 export default class GamesScreen extends React.Component {
 
     state = {
