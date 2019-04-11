@@ -4,9 +4,12 @@ import { SearchBar, Button } from 'react-native-elements';
 
 import ProductScreen from './ProductScreen.js';
 
+const {url} = '';
 
 export default class HomeScreen extends React.Component {
 
+	url = this.props.navigation.getParam('url', 'noo');
+	
     state = {
         search: '',
     };
@@ -44,13 +47,12 @@ export default class HomeScreen extends React.Component {
                     onChangeText={this.updateSearch}
                     value={search}
                 /> 
-
                   <Button
                     type="solid"
                     size={15}
                     style={{height: 60, width: 10, marginTop: 500}}
                      onPress={() => {
-                         this.props.navigation.navigate('ProductScreen')
+                         this.props.navigation.navigate('ProductScreen', {url: this.url})
                          
                     }}
                    title="Make an Order"

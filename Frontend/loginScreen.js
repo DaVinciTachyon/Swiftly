@@ -4,9 +4,14 @@ import {
     TouchableWithoutFeedback, StatusBar,
     TextInput, SafeAreaView, Keyboard, TouchableOpacity,
     KeyboardAvoidingView, Button, ImageBackground, Dimensions
-} from 'react-native'
+} from 'react-native';
+
+const {ipAndPort} = '';
 
 export default class Login extends Component {
+	// ip and port are specific to the computer the server is being run on
+	ipAndPort = '10.6.29.26:8000';
+	
     render() {
         return (
             <SafeAreaView style={styles.container}>
@@ -27,6 +32,7 @@ export default class Login extends Component {
                                     placeholderTextColor='black'
                                     keyboardType='email-address'
                                     returnKeyType='next'
+									onEndEditing={(text) => this.setState({text})}
                                     autoCorrect={false}
                                     onSubmitEditing={() => this.refs.txtPassword.focus()}
                                 />
@@ -38,15 +44,24 @@ export default class Login extends Component {
                                     autoCorrect={false}
                                     ref={"txtPassword"}
                                 />
-                                <Button style={styles.buttonContainer}
-                                    title="SIGN IN"
-                                    color="#1569C7"
-                                    onPress={() => {
-                                        this.props.navigation.navigate('ProductScreen')
-
-                                    }}
-                                >
-                                </Button>
+								{/*	Temporary until login is sorted	*/}
+								<TouchableOpacity
+									onPress={() => {
+										this.props.navigation.navigate('Home',{url: this.ipAndPort})
+									}}
+									onLongPress={()=>{
+										this.props.navigation.navigate('Driver',{url: this.ipAndPort})
+									}}
+								>
+								<Button
+									title="SIGN IN"
+									color="#1569C7"
+									disabled={true}
+										onPress={() => {
+											this.props.navigation.navigate('Home')
+										}}
+								/>
+								</TouchableOpacity>
                             </View>
                         </View>
                     </TouchableWithoutFeedback>

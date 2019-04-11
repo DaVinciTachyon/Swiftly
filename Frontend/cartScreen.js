@@ -4,18 +4,37 @@ import { createStackNavigator } from 'react-navigation';
 import loginScreen from './loginScreen.js';
 import FoodScreen from './FoodScreen.js';
 
+const {url} = '';
+
 export default class CartScreen extends React.Component {
 
-    state = {
-        products: [
-            { name: "Orchard Thieves, keg", imageSrc: "https://pbs.twimg.com/profile_images/594096158831697920/wGJi-8JQ_400x400.jpg" },
-            { name: "Cluedo", imageSrc: "https://image.smythstoys.com/original/desktop/152077.jpg" },
-            { name: "Chicken Nuggets", imageSrc: "https://assets3.thrillist.com/v1/image/2806787/size/tmg-article_default_mobile.jpg" },
-            { name: "Cutlery", imageSrc: "https://www.ikea.com/PIAimages/25795_PE099076_S5.JPG" }
-        ]
-
-    };
-
+	url = this.props.navigation.getParam('url', 'noo');
+	
+	constructor(props) {
+		{/* holds data fetched to be displayed */}
+		super(props);
+		this.state = {
+			loading: true,
+			dataSource:[]
+		};
+	}
+	
+	componentDidMount(){
+		{/* url
+			- ipv4 address of machine server is running on(on same network)
+			- port server is on
+			- specfic to data being queryied
+		*/}
+		fetch('http://'+this.url+'/cart/')
+		.then(response => response.json())
+		.then((responseJson)=> {
+			this.setState({
+				loading: false,
+				dataSource: responseJson
+			})
+		})
+		.catch(error=>console.log(error)) //to catch the errors if any
+	}
 
     render() {
         return (
@@ -47,15 +66,16 @@ export default class CartScreen extends React.Component {
                             style={{ height: 1, width: "100%", backgroundColor: "lightgray" }}
                             />
                             }
-                            data={this.state.products}
-                            keyExtractor={item => item.name}
+                            data={this.state.dataSource}
+                            keyExtractor={item => item.id.toString()}
                             renderItem={({ item }) =>
                                 <View style={{ flexDirection: "row", alignItems: "center" }}>
-                                    <Image
-                                        style={{ width: 50, height: 50 }}
-                                        source={{ uri: item.imageSrc }}
-                                    />
-                                    <Text style={{ padding: 10 }}>{item.name}</Text>
+									<View style={{width:'50%'}}>
+										<Text style={{ padding: 10 }}>{'item_id: '+item.item_id}</Text>
+                                    </View>
+									<View style={{width:'50%'}}>
+										<Text style={{ padding: 10 }}>{'quantity: '+item.quantity}</Text>
+                                    </View>
 
                                 </View>
                             }
@@ -64,8 +84,9 @@ export default class CartScreen extends React.Component {
 
                     <View style={styles.textContainer}>
 
-                    <Text style={{ fontSize: 40}}>
-                            Total: 75 euro </Text>
+                    <Text style={{ fontSize: 30}}>
+                            Total: (sum(items) + fee)
+					</Text>
                         <Text style={{ fontSize: 25}}>
                         Total is including delivery</Text>
                     </View>
