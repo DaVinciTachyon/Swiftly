@@ -8,20 +8,18 @@ const LONGITUDE = -6.250267;
 const DELTA = 0.11;
 const GOOGLE_MAPS_APIKEY = 'AIzaSyCYvMpmVhFc0ydILEuXGJNYNGFnBoKPCL8';
 
+const {lat} = 1;
+const {long} = 1;
+
 class DriverMap extends React.Component{
+	
+	lat = this.props.navigation.getParam('lat', 1);
+	long = this.props.navigation.getParam('long', 1);
+	
 	constructor(props) {
 		{/* holds data fetched to be displayed */}
 		super(props);
 		this.state = {
-			loading: true,
-			dataSource:[],
-			orders: [{
-				address: "29 Oldtown Ave,\nSantry,\nDublin 9,\nD09 WP48",screen:'Order1'
-			},{
-				address: "34 Seapark Rd,\nClontarf East,\nDublin 3,\nD03 HX77",screen:'Order1'
-			},{
-				address: "27 Charleston Ave,\nDublin 6,\nD06 KN72",screen:'Order1'
-			}],
 			mapRegion: {
 				latitude: null,
 				longitude: null,
@@ -37,28 +35,6 @@ class DriverMap extends React.Component{
 				}
 			}
 		};
-	}
-
-	state = {
-		
-	}
-	
-	componentDidMount() {
-		this._getLocationAsync();
-		{/* url
-			- ipv4 address of machine server is running on(on same network)
-			- port server is on
-			- specfic to data being queryied
-		*/}
-		fetch("http://192.168.0.73:8000/")
-		.then(response => response.json())
-		.then((responseJson)=> {
-			this.setState({
-				loading: false,
-				dataSource: responseJson
-			})
-		})
-		.catch(error=>console.log(error)) //to catch the errors if any
 	}
 	
 	_handleMapRegionChange = mapRegion => {
@@ -79,15 +55,6 @@ class DriverMap extends React.Component{
 	};
 
 	render() {
-		{/* for when data has not loaded in, loading screen
-		if(this.state.loading){
-			return( 
-				<View style={styles.loader}> 
-					<ActivityIndicator size="large" color="#0c9"/>
-				</View>
-			)
-		}
-		*/}
 		return (
 			<View style={{flex:1}}>
 				<MapView
@@ -105,7 +72,10 @@ class DriverMap extends React.Component{
 				
 					<MapViewDirections
 						origin={this.state.location.coords}
-						destination={this.state.marker.coordinates}
+						destination={LatLng={
+							latitude: this.lat,
+							longitude: this.long,
+						}}
 						apikey={GOOGLE_MAPS_APIKEY}
 						strokeWidth={5}
   						strokeColor="#FF0000"
@@ -113,7 +83,10 @@ class DriverMap extends React.Component{
   						onError={this.onError}
 					/>
 					<MapView.Marker
-						coordinate={this.state.marker.coordinates}
+						coordinate={LatLng={
+							latitude: this.lat,
+							longitude: this.long,
+						}}
 					/>
 				</MapView>
 				<Text

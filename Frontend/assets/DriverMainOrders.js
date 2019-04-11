@@ -6,34 +6,23 @@ import{
 	FlatList,
 	Image,
 	Alert,
-	TouchableOpacity
+	TouchableOpacity,
+	ActivityIndicator
 } from 'react-native';
 
+const {url} = '';
+
 class DriverMainOrders extends React.Component{
+	
+	url = this.props.navigation.getParam('url', 'noo');
 	
 	constructor(props) {
 		{/* holds data fetched to be displayed */}
 		super(props);
 		this.state = {
+			url: "lul",
 			loading: true,
-			dataSource:[],
-			orders: [{	
-				address: "38 St Malachy's Dr,\nGreenhills,\nDublin 12,\nD12 V9P6",screen:'Order1'
-			},{
-				address: "169 Balally Dr,\nBlackthorn,\nDublin 16,\nD16 XE67",screen:'Order1'
-			},{	
-				address: "29 Greencastle Dr,\nBonnybrook,\nDublin,\nD17 W273",screen:'Order1'
-			},{
-				address: "77 Ratoath Ave,\nFinglas South,\nDublin 11,\nD11 W285",screen:'Order1'
-			},{
-				address: "28 The Glen,\nBoden Park,\nRathfarnham,\nDublin 16,\nD16 N6C5",screen:'Order1'
-			},{
-				address: "29 Oldtown Ave,\nSantry,\nDublin 9,\nD09 WP48",screen:'Order1'
-			},{
-				address: "34 Seapark Rd,\nClontarf East,\nDublin 3,\nD03 HX77",screen:'Order1'
-			},{
-				address: "27 Charleston Ave,\nDublin 6,\nD06 KN72",screen:'Order1'
-			}]
+			dataSource:[]
 		};
 	}
 	
@@ -43,7 +32,7 @@ class DriverMainOrders extends React.Component{
 			- port server is on
 			- specfic to data being queryied
 		*/}
-		fetch("http://192.168.0.73:8000/pickuplocation/")
+		fetch('http://'+this.url+'/pickuplocation/')
 		.then(response => response.json())
 		.then((responseJson)=> {
 			this.setState({
@@ -53,9 +42,26 @@ class DriverMainOrders extends React.Component{
 		})
 		.catch(error=>console.log(error)) //to catch the errors if any
 	}
-	
+
+	renderOrder(item){
+		if(!item.is_open){
+			return;
+		}
+		return(
+			<TouchableOpacity
+				onPress={
+					() => this.props.navigation.navigate('Order1',{lat: item.latitude, long: item.longitude})
+				}
+			>
+				<View style={{ flexDirection: "row", alignItems: "center" }}>
+					<Text style={{ padding: 10 }}>{item.address}</Text>
+				</View>
+			</TouchableOpacity>
+		);
+	}
+
 	render() {
-		{/* for when data has not loaded in, loading screen
+		{/* for when data has not loaded in, loading screen	*/}
 		if(this.state.loading){
 			return( 
 				<View style={styles.loader}> 
@@ -63,7 +69,7 @@ class DriverMainOrders extends React.Component{
 				</View>
 			)
 		}
-		*/}
+		
 		return (
 			<View style={{
 				flex: 1,
@@ -81,7 +87,7 @@ class DriverMainOrders extends React.Component{
 					<TouchableOpacity
 						style={[styles.label,{width : '50%'}]}
 						onPress={
-							() => this.props.navigation.navigate('MarkersMap')
+							() => this.props.navigation.navigate('MarkersMap',{url: this.url})
 						}
 					>
 						<Text style={[styles.labelText]}>
@@ -96,25 +102,17 @@ class DriverMainOrders extends React.Component{
 							style={{ height: 1, width: "100%", backgroundColor: "lightgray" }}
 						/>
 					}
-					data={this.state.orders}
-					keyExtractor={item => item.address}
-					renderItem={({ item }) =>
-						<TouchableOpacity
-							onPress={
-								() => this.props.navigation.navigate(item.screen)
-							}
-						>
-							<View style={{ flexDirection: "row", alignItems: "center" }}>
-								<Text style={{ padding: 10 }}>{item.address}</Text>
-							</View>
-						</TouchableOpacity>
-					}
+					data={this.state.dataSource}
+					extraData={this.state}
+					keyExtractor={item => item.url}
+					renderItem={({item}) => this.renderOrder(item)}
+					
 				/>
 				{/*	available orders - takes to all available orders	*/}
 				<TouchableOpacity
 					style={styles.label}
 					onPress={
-						() => this.props.navigation.navigate('AvailableOrders')
+						() => this.props.navigation.navigate('AvailableOrders',{url: this.url})
 					}
 				>
 					<Text style={[styles.labelText]}>

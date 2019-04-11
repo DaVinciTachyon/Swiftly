@@ -10,7 +10,14 @@ import {
 	TouchableOpacity
 } from 'react-native';
 
+const {lat} = 1;
+const {long} = 1;
+
 class OrderScreen1 extends React.Component{
+	
+	lat = this.props.navigation.getParam('lat', 1);
+	long = this.props.navigation.getParam('long', 1);
+	
 	state = {
 		products: [{
 			itemName: "Silver Hearts Confetti - 6 pack", quantity: '1', imageSrc:
@@ -101,7 +108,7 @@ class OrderScreen1 extends React.Component{
 									padding: 10
 								}}
 								onPress={
-									() => this.props.navigation.navigate('Map')
+									() => this.props.navigation.navigate('Map',{lat:this.lat,long:this.long})
 								}
 							>
 								<Text style={[styles.labelText]}>

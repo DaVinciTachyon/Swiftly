@@ -5,73 +5,18 @@ import{StyleSheet,Text,View,ActivityIndicator} from 'react-native';
 const LATITUDE = 53.343537;
 const LONGITUDE = -6.250267;
 const DELTA = 0.11;
+const {url} = '';
 
 class MarkersMapScreen extends React.Component{
+	
+	url = this.props.navigation.getParam('url', 'noo');
+	
 	constructor(props) {
 		{/* holds data fetched to be displayed */}
 		super(props);
 		this.state = {
 			loading: true,
-			dataSource:[],
-			mapRegion: {
-			latitude: null,
-			longitude: null,
-			latitudeDelta: null,
-			longitudeDelta: null
-			},
-			locationResult: null,
-			location: {coords: { latitude: LATITUDE, longitude: LONGITUDE}},
-			markers:[
-				{
-					coordinates:{
-						latitude:53.310627,
-						longitude:-6.334087
-					},
-					screen:'Order1'
-				},{
-					coordinates:{
-						latitude:53.278943,
-						longitude:-6.227107
-					},
-					screen:'Order1'
-				},{
-					coordinates:{
-						latitude:53.397589,
-						longitude:-6.201678
-					},
-					screen:'Order1'
-				},{
-					coordinates:{
-						latitude:53.388510,
-						longitude:-6.319687
-					},
-					screen:'Order1'
-				},{
-					coordinates:{
-						latitude:53.283560,
-						longitude:-6.300406
-					},
-					screen:'Order1'
-				},{
-					coordinates:{
-						latitude:53.393166,
-						longitude: -6.260180
-					},
-					screen:'Order1'
-				},{
-					coordinates:{
-						latitude:53.364398,
-						longitude: -6.187742
-					},
-					screen:'Order1'
-				},{
-					coordinates:{
-						latitude:53.322879,
-						longitude: -6.258045
-					},
-					screen:'Order1'
-				}
-			]
+			dataSource:[]
 		};
 	}
 	
@@ -81,7 +26,7 @@ class MarkersMapScreen extends React.Component{
 			- port server is on
 			- specfic to data being queryied
 		*/}
-		fetch("http://192.168.0.73:8000/")
+		fetch('http://'+this.url+'/pickuplocation/')
 		.then(response => response.json())
 		.then((responseJson)=> {
 			this.setState({
@@ -93,15 +38,14 @@ class MarkersMapScreen extends React.Component{
 	}
 
 	render() {
-		{/* for when data has not loaded in, loading screen
+		{/* for when data has not loaded in, loading screen */}
 		if(this.state.loading){
 			return( 
-				<View style={styles.loader}> 
+				<View> 
 					<ActivityIndicator size="large" color="#0c9"/>
 				</View>
 			)
 		}
-		*/}
 		return (
 			<View style={{flex:1}}>
 				<MapView
@@ -115,20 +59,19 @@ class MarkersMapScreen extends React.Component{
 					showsUserLocation = {true}
 					showsMyLocationButton = {true}
 				>
-					{this.state.markers.map(item =>(
+					{this.state.dataSource.map(item =>(
 						<MapView.Marker
-							key={item.coordinates.latitude.toString()}
-							coordinate={item.coordinates}
+							key={item.url.toString()}
+							coordinate={LatLng ={
+								latitude: item.latitude,
+								longitude: item.longitude,
+							}}
 							onPress={
-								() => this.props.navigation.navigate(item.screen)
+								() => this.props.navigation.navigate('Order1', {lat: item.latitude, long: item.longitude})
 							}
 						/>
 					))}
 				</MapView>
-				<Text style={{color:'#FFFFFF'}}>
-				{/*	BUG - to be left in for my location button to show	*/}
-					{this.state.locationResult}
-				</Text>
 			</View>
 		);
 	}

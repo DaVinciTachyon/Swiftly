@@ -10,12 +10,20 @@ import{
 } from 'react-native';
 import { Button } from 'react-native-elements';
 
+const {url} = '';
+const {temp} = '';
+
+
 class AvailableOrdersScreen extends React.Component{
+	
+	url = this.props.navigation.getParam('url', 'noo');
+	
 	constructor(props) {
 		{/* holds data fetched to be displayed */}
 		super(props);
 		this.state = {
 			loading: true,
+			postData:[],
 			dataSource:[],
 			orders: [{
 				address: "29 Oldtown Ave,\nSantry,\nDublin 9,\nD09 WP48",screen:'Order1'
@@ -33,7 +41,7 @@ class AvailableOrdersScreen extends React.Component{
 			- port server is on
 			- specfic to data being queryied
 		*/}
-		fetch("http://192.168.0.73:8000/")
+		fetch('http://'+this.url+'/pickuplocation/')
 		.then(response => response.json())
 		.then((responseJson)=> {
 			this.setState({
@@ -44,11 +52,37 @@ class AvailableOrdersScreen extends React.Component{
 		.catch(error=>console.log(error)) //to catch the errors if any
 	}
 	
-	deleteMessage(item) {
-		Alert.alert("add order to selected");
+	deleteMessage() {
+		//bugged
+		fetch(this.url+'8/', {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				id: 8,
+				address: "27 Charleston Ave,\r\nDublin 6,\r\nD06 KN72",
+				longitude: -6.258045,
+				latitude: 53.322879,
+				phone_number: 8,
+				is_open: true,
+				is_active: false
+			}),
+		})
+		.then(response => response.json())
+				.then((responseJson)=> {
+					this.setState({
+						postData: responseJson
+					})
+				})
+				.catch(error=>console.log(error)) //to catch the errors if any;
 	}
 	
 	renderOrder(order){
+		if(order.is_open){
+			return;
+		}
 		return(
 			<View style={{
 				flex: 1,
@@ -59,7 +93,7 @@ class AvailableOrdersScreen extends React.Component{
 				<TouchableOpacity
 					style={{width: '50%'}}
 					onPress={
-						() => this.props.navigation.navigate(order.screen)
+						() => this.props.navigation.navigate('Order1', {lat: order.latitude, long: order.longitude})
 					}
 				>
 					<View style={{ flex:1,flexDirection: "row", alignItems: "center" }}>
@@ -71,7 +105,7 @@ class AvailableOrdersScreen extends React.Component{
 					<Button
 						type='solid'
 						title='Select Order'
-						onPress={({order}) => this.deleteMessage(order) }
+						onPress={() => this.deleteMessage() }
 					/>
 				</View>
 			</View>
@@ -99,7 +133,7 @@ class AvailableOrdersScreen extends React.Component{
 				</View>
 				{/*	flatlist that renders the available orders	*/}
 				<FlatList
-					data={this.state.orders}
+					data={this.state.dataSource}
 					extraData={this.state}
 					keyExtractor={item => item.address}
 					renderItem={({item}) => this.renderOrder(item)}
