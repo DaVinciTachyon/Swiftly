@@ -2,6 +2,12 @@
 
 # Front End
 
+The Deployment.txt file details how to run the app.
+The start.bat file will launch expo in your defaut web browser, providing a QR code that can be scanned using the Expo app on your android phone. This will then launch the Swiftly app on your Phone.
+The fronend folder conatins all code needed to run the app using the expo framework.
+The .js files within the main Frontend folder are the files specific to the customer side and to navigating between screens.
+The .js files within the Frontend/assets are the files specific to the driver side of the app.
+
 # Back End
 
 The backend contains three scripts:
