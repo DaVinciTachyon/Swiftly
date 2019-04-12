@@ -19,11 +19,16 @@ in the box labeled 'user variables for <USER>' select
 On the box that appears click 'new' and add
 'C:\Program Files\nodejs' before pressing ok on both
 boxes.
+install expo by running 'npm install -g expo-cli'
+in the command prompt.
 
 Clicking on the start.bat file should now launch expo
 in your defaut browser, the app can then be launched
 on your android phone by downloading the expo app and
 scanning the QR code on screen.
+If clicking on the start.bat does not work, in the command prompt
+enter 'cd path\to\Swiftly\Fontend'
+      'npm start'
 
 NOTE: the computer running the backend and the phone running
 the app must be on the same wifi network and the ip constant
