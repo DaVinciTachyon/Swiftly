@@ -1,0 +1,29 @@
+Deployment file:
+
+The directons to install and run the backend
+on a linux disto are contained in the README.md
+
+To intall and run the Frontend side of the app
+on windows download and install node.js, available at
+https://nodejs.org/en/download/
+Once node.js has been installed then add npm to the
+PATH environment variable.
+Search 'edit environment variables for your account'
+in the box labeled 'user variables for <USER>' select
+'Path' then click the edit button
+On the box that appears click 'new' and add
+'C:\Program Files\nodejs' before pressing ok on both
+boxes.
+
+Clicking on the start.bat file should now launch expo
+in your defaut browser, the app can then be launched
+on your android phone by downloading the expo app and
+scanning the QR code on screen.
+
+NOTE: the computer running the backend and the phone running
+the app must be on the same wifi network and the ip constant
+on line 16 in Swiftly/Frontend/loginScreen.js must be 
+changed to the IPV4 address of the backend computer (which
+can be found by running 'ipconfig' in a terminal.
+the port should remain '8000'
+example ipAndPort 'my.backend.ip.address:8000'
